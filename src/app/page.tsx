@@ -132,7 +132,7 @@ export default async function HomePage() {
 
       {/* ---------------------- Instagram CTA ------------------------- */}
       <section className="container-page pb-8">
-        <div className="overflow-hidden rounded-[2rem] bg-ink px-6 py-12 text-center text-cream md:py-16">
+        <div className="overflow-hidden rounded-[2rem] bg-clay px-6 py-12 text-center text-cream md:py-16">
           <p className="eyebrow text-gold">@designsofds on Instagram</p>
           <h2 className="mt-3 text-3xl text-cream md:text-4xl">Our happy customers</h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-cream/80">
@@ -140,7 +140,10 @@ export default async function HomePage() {
             full range on our WhatsApp catalogue.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/happy-customers" className={buttonClasses("primary", "lg")}>
+            <Link
+              href="/happy-customers"
+              className={buttonClasses("primary", "lg", "bg-cream text-clay-dark hover:bg-cream/90")}
+            >
               View Happy Customers <ArrowRight size={18} />
             </Link>
             <a

@@ -2,22 +2,24 @@
 
 /*
   D's Designs — premium handmade baskets & bags.
-  Warm, natural, editorial palette: ivory canvas, espresso ink,
-  terracotta clay, muted sage and antique gold accents.
+  Bright, airy, editorial palette: ivory canvas, soft ink,
+  Chumbak-inspired teal accent, muted sage and antique gold.
 */
 @theme {
   /* Brand palette */
-  --color-cream: #fbf8f3;
-  --color-sand: #f3ece1;
-  --color-linen: #ece2d2;
-  --color-ink: #26201b;
-  --color-ink-soft: #5b4f45;
-  --color-clay: #a85a3c;
-  --color-clay-dark: #8c4730;
+  --color-cream: #ffffff;
+  --color-sand: #f4f7f6;
+  --color-linen: #e8efed;
+  --color-ink: #25302e;
+  --color-ink-soft: #5c6664;
+  /* Primary accent — teal/blue-green (kept under the `clay` name so the
+     hundreds of existing `clay` utility classes recolour in one place). */
+  --color-clay: #0f9b91;
+  --color-clay-dark: #0b766e;
   --color-sage: #7c8a6b;
   --color-sage-dark: #5f6c50;
   --color-gold: #c8a04d;
-  --color-border: #e4d8c6;
+  --color-border: #e2e9e7;
 
   /* Semantic aliases used across the app */
   --color-background: var(--color-cream);
@@ -40,7 +42,7 @@
     scroll-behavior: smooth;
   }
   body {
-    background: var(--color-cream);
+    background: var(--color-sand);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

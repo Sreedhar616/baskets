@@ -14,7 +14,7 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-40">
       {settings.announcementText && (
-        <div className="bg-ink text-cream">
+        <div className="bg-clay text-cream">
           <p className="container-page py-2 text-center text-xs tracking-wide">
             {settings.announcementText}
           </p>

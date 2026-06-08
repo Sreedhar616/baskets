@@ -14,7 +14,7 @@ export async function Footer() {
   const instagram = settings.instagramUrl || SITE.instagramUrl;
 
   return (
-    <footer className="mt-20 border-t border-border bg-sand">
+    <footer className="mt-20 border-t border-clay/15 bg-clay/[0.06]">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
           <p className="font-display text-2xl">{SITE.name}</p>

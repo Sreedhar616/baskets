@@ -99,6 +99,14 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           )}
           <input className={FIELD} type="password" placeholder="Password" value={form.password} onChange={(e) => update("password", e.target.value)} required minLength={6} />
 
+          {mode === "login" && (
+            <div className="text-right">
+              <Link href="/forgot-password" className="text-sm text-clay hover:underline">
+                Forgot password?
+              </Link>
+            </div>
+          )}
+
           {error && <p className="rounded-lg bg-clay/10 px-3 py-2 text-sm text-clay-dark">{error}</p>}
           {info && <p className="rounded-lg bg-sage/15 px-3 py-2 text-sm text-sage-dark">{info}</p>}
 
