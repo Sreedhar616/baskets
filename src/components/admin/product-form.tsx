@@ -28,11 +28,13 @@ export function ProductForm({
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState(product?.name ?? "");
   const [slug, setSlug] = useState(product?.slug ?? "");
+  const [stock, setStock] = useState<number>(product?.stock ?? 0);
 
   /** Reset every field back to the product's saved values (or blank for a new product). */
   function handleDiscard() {
     setName(product?.name ?? "");
     setSlug(product?.slug ?? "");
+    setStock(product?.stock ?? 0);
     setImages(product?.images ?? []);
     setError(null);
     formRef.current?.reset();
@@ -78,7 +80,7 @@ export function ProductForm({
       comparePriceRupees: fd.get("comparePrice") ? Number(fd.get("comparePrice")) : null,
       description: String(fd.get("description") || ""),
       images,
-      stock: Number(fd.get("stock")),
+      stock,
       isActive: fd.get("isActive") === "on",
       isFeatured: fd.get("isFeatured") === "on",
     };
@@ -136,7 +138,30 @@ export function ProductForm({
 
       <div>
         <label className={LABEL}>Stock</label>
-        <input name="stock" type="number" min="0" step="1" required className={FIELD} defaultValue={product?.stock ?? 0} />
+        <div className="flex items-center gap-2">
+          <input
+            name="stock"
+            type="number"
+            min="0"
+            step="1"
+            required
+            className={FIELD}
+            value={stock}
+            onChange={(e) => setStock(Math.max(0, Math.floor(Number(e.target.value) || 0)))}
+          />
+          <button
+            type="button"
+            onClick={() => setStock(0)}
+            className={cn(buttonClasses("outline", "md"), "shrink-0 whitespace-nowrap")}
+          >
+            Mark out of stock
+          </button>
+        </div>
+        {stock <= 0 && (
+          <p className="mt-1.5 text-xs text-red-600">
+            Shows as “Sold out” to customers. Enter a number above to restock.
+          </p>
+        )}
       </div>
 
       <div>

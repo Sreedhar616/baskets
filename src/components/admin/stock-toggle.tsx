@@ -1,50 +1,40 @@
 "use client";
 
+import Link from "next/link";
 import { useTransition } from "react";
-import { Ban, RotateCcw, Loader2 } from "lucide-react";
+import { Ban, Loader2, Pencil } from "lucide-react";
 import { setProductStock } from "@/app/admin/actions";
-import { cn } from "@/lib/utils";
-
-/** Stock applied when an admin marks a sold-out product "back in stock". */
-const RESTOCK_DEFAULT = 10;
 
 /**
- * One-click stock control for the admin products list.
- * - In stock  → "Mark out of stock" (sets stock to 0)
- * - Sold out  → "Back in stock"     (sets stock to RESTOCK_DEFAULT)
- * For an exact count, the admin still uses the product's Edit page.
+ * Stock control for the admin products list.
+ * - In stock → one-click "Mark out of stock" (sets stock to 0).
+ * - Sold out → "Restock" link to the Edit page, where the admin types the real
+ *   count (we never guess a number for them).
  */
 export function StockToggle({ id, stock }: { id: string; stock: number }) {
   const [pending, startTransition] = useTransition();
-  const soldOut = stock <= 0;
 
-  function toggle() {
-    startTransition(async () => {
-      await setProductStock(id, soldOut ? RESTOCK_DEFAULT : 0);
-    });
+  if (stock <= 0) {
+    return (
+      <Link
+        href={`/admin/products/${id}`}
+        className="inline-flex items-center gap-1.5 rounded-full bg-sage/15 px-3 py-1.5 text-xs font-medium text-sage-dark hover:bg-sage/25"
+      >
+        <Pencil size={13} /> Restock
+      </Link>
+    );
   }
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => startTransition(async () => { await setProductStock(id, 0); })}
       disabled={pending}
-      title={soldOut ? `Set stock to ${RESTOCK_DEFAULT}` : "Set stock to 0"}
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50",
-        soldOut
-          ? "bg-sage/15 text-sage-dark hover:bg-sage/25"
-          : "bg-sand text-ink-soft hover:bg-linen"
-      )}
+      title="Set stock to 0"
+      className="inline-flex items-center gap-1.5 rounded-full bg-sand px-3 py-1.5 text-xs font-medium text-ink-soft hover:bg-linen disabled:opacity-50"
     >
-      {pending ? (
-        <Loader2 size={13} className="animate-spin" />
-      ) : soldOut ? (
-        <RotateCcw size={13} />
-      ) : (
-        <Ban size={13} />
-      )}
-      {pending ? "Saving…" : soldOut ? "Back in stock" : "Mark out of stock"}
+      {pending ? <Loader2 size={13} className="animate-spin" /> : <Ban size={13} />}
+      {pending ? "Saving…" : "Mark out of stock"}
     </button>
   );
 }
