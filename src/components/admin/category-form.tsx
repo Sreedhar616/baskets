@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Loader2, Upload, X } from "lucide-react";
@@ -15,12 +15,22 @@ const LABEL = "block text-sm font-medium mb-1.5";
 
 export function CategoryForm({ category }: { category?: Category }) {
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
   const [name, setName] = useState(category?.name ?? "");
   const [slug, setSlug] = useState(category?.slug ?? "");
   const [imageUrl, setImageUrl] = useState<string | null>(category?.imageUrl ?? null);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  /** Reset every field back to the category's saved values (or blank for a new category). */
+  function handleDiscard() {
+    setName(category?.name ?? "");
+    setSlug(category?.slug ?? "");
+    setImageUrl(category?.imageUrl ?? null);
+    setError(null);
+    formRef.current?.reset();
+  }
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -65,7 +75,7 @@ export function CategoryForm({ category }: { category?: Category }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-2xl space-y-5">
+    <form ref={formRef} onSubmit={onSubmit} className="max-w-2xl space-y-5">
       <div>
         <label className={LABEL}>Name</label>
         <input name="name" required className={FIELD} value={name} onChange={(e) => { setName(e.target.value); if (!category) setSlug(slugify(e.target.value)); }} />
@@ -108,11 +118,12 @@ export function CategoryForm({ category }: { category?: Category }) {
 
       {error && <p className="rounded-lg bg-clay/10 px-3 py-2 text-sm text-clay-dark">{error}</p>}
 
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
         <button type="submit" disabled={saving} className={buttonClasses("primary", "md")}>
           {saving && <Loader2 className="animate-spin" size={16} />} Save category
         </button>
-        <button type="button" onClick={() => router.back()} className={buttonClasses("outline", "md")}>Cancel</button>
+        <button type="button" onClick={handleDiscard} disabled={saving} className={buttonClasses("outline", "md")}>Discard changes</button>
+        <button type="button" onClick={() => router.back()} className={buttonClasses("ghost", "md")}>Cancel</button>
       </div>
     </form>
   );

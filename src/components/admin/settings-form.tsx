@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Check } from "lucide-react";
 import { saveSettings, type SettingsInput } from "@/app/admin/actions";
@@ -12,9 +12,17 @@ const LABEL = "block text-sm font-medium mb-1.5";
 
 export function SettingsForm({ settings }: { settings: SiteSettings }) {
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  /** Reset all settings fields back to their saved values. */
+  function handleDiscard() {
+    setError(null);
+    setSaved(false);
+    formRef.current?.reset();
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,7 +53,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-2xl space-y-5">
+    <form ref={formRef} onSubmit={onSubmit} className="max-w-2xl space-y-5">
       <section className="rounded-2xl border border-border bg-cream p-5">
         <h2 className="font-display text-lg">Store</h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -75,10 +83,15 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
 
       {error && <p className="rounded-lg bg-clay/10 px-3 py-2 text-sm text-clay-dark">{error}</p>}
 
-      <button type="submit" disabled={saving} className={buttonClasses("primary", "md")}>
-        {saving ? <Loader2 className="animate-spin" size={16} /> : saved ? <Check size={16} /> : null}
-        {saved ? "Saved" : "Save settings"}
-      </button>
+      <div className="flex flex-wrap gap-3">
+        <button type="submit" disabled={saving} className={buttonClasses("primary", "md")}>
+          {saving ? <Loader2 className="animate-spin" size={16} /> : saved ? <Check size={16} /> : null}
+          {saved ? "Saved" : "Save settings"}
+        </button>
+        <button type="button" onClick={handleDiscard} disabled={saving} className={buttonClasses("outline", "md")}>
+          Discard changes
+        </button>
+      </div>
     </form>
   );
 }

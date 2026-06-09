@@ -65,6 +65,18 @@ export async function deleteProduct(id: string) {
   revalidateStore();
 }
 
+/** Quick stock toggle from the products list: set to 0 (sold out) or restock. */
+export async function setProductStock(id: string, stock: number) {
+  const supabase = await adminClient();
+  const { error } = await supabase
+    .from("products")
+    .update({ stock: Math.max(0, Math.floor(stock)) })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidateStore();
+  revalidatePath("/admin/products");
+}
+
 /* ----------------------------- Categories ------------------------------ */
 
 export interface CategoryInput {

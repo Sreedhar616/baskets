@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { getAllProducts } from "@/lib/admin-queries";
 import { deleteProduct } from "@/app/admin/actions";
 import { DeleteButton } from "@/components/admin/delete-button";
+import { StockToggle } from "@/components/admin/stock-toggle";
 import { buttonClasses } from "@/components/ui/button";
 import { formatINR, cn } from "@/lib/utils";
 
@@ -37,8 +38,14 @@ export default async function AdminProductsPage() {
                 </p>
               </div>
               <div className="flex items-center gap-2">
+                {p.stock <= 0 && (
+                  <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
+                    Sold out
+                  </span>
+                )}
                 {!p.isActive && <span className="rounded-full bg-sand px-2 py-0.5 text-xs">Hidden</span>}
                 {p.isFeatured && <span className="rounded-full bg-gold/20 px-2 py-0.5 text-xs">Featured</span>}
+                <StockToggle id={p.id} stock={p.stock} />
                 <Link href={`/admin/products/${p.id}`} className={cn(buttonClasses("ghost", "sm"), "px-3")}>Edit</Link>
                 <DeleteButton id={p.id} action={deleteProduct} message="Delete this product?" />
               </div>

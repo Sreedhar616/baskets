@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Loader2, Upload, X } from "lucide-react";
@@ -21,12 +21,22 @@ export function ProductForm({
   product?: Product;
 }) {
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
   const [images, setImages] = useState<string[]>(product?.images ?? []);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState(product?.name ?? "");
   const [slug, setSlug] = useState(product?.slug ?? "");
+
+  /** Reset every field back to the product's saved values (or blank for a new product). */
+  function handleDiscard() {
+    setName(product?.name ?? "");
+    setSlug(product?.slug ?? "");
+    setImages(product?.images ?? []);
+    setError(null);
+    formRef.current?.reset();
+  }
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
@@ -83,7 +93,7 @@ export function ProductForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-2xl space-y-5">
+    <form ref={formRef} onSubmit={onSubmit} className="max-w-2xl space-y-5">
       <div>
         <label className={LABEL}>Name</label>
         <input
@@ -170,11 +180,14 @@ export function ProductForm({
 
       {error && <p className="rounded-lg bg-clay/10 px-3 py-2 text-sm text-clay-dark">{error}</p>}
 
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
         <button type="submit" disabled={saving} className={buttonClasses("primary", "md")}>
           {saving && <Loader2 className="animate-spin" size={16} />} Save product
         </button>
-        <button type="button" onClick={() => router.back()} className={buttonClasses("outline", "md")}>
+        <button type="button" onClick={handleDiscard} disabled={saving} className={buttonClasses("outline", "md")}>
+          Discard changes
+        </button>
+        <button type="button" onClick={() => router.back()} className={buttonClasses("ghost", "md")}>
           Cancel
         </button>
       </div>
