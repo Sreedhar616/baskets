@@ -26,7 +26,7 @@ export async function Header() {
           <MobileNav categories={categories} />
 
           <Link href="/" className="flex items-baseline gap-1 md:mr-4">
-            <span className="font-display text-2xl leading-none md:text-[1.7rem]">
+            <span className="text-2xl font-semibold uppercase leading-none tracking-tight md:text-[1.7rem]">
               {SITE.name}
             </span>
           </Link>
@@ -35,28 +35,28 @@ export async function Header() {
           <nav className="ml-2 hidden items-center gap-1 md:flex">
             <Link
               href="/"
-              className="rounded-full px-3 py-2 text-sm hover:bg-sand"
+              className="rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wide hover:bg-sand"
             >
               Home
             </Link>
             <Link
               href="/products"
-              className="rounded-full px-3 py-2 text-sm hover:bg-sand"
+              className="rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wide hover:bg-sand"
             >
               All Products
             </Link>
 
             <div className="group relative">
-              <button className="flex items-center gap-1 rounded-full px-3 py-2 text-sm hover:bg-sand">
+              <button className="flex items-center gap-1 rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wide hover:bg-sand">
                 Categories <ChevronDown size={14} />
               </button>
               <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                <div className="grid w-[34rem] grid-cols-2 gap-1 rounded-2xl border border-border bg-cream p-3 shadow-lg">
+                <div className="grid w-[34rem] grid-cols-2 gap-1 rounded-md border border-border bg-cream p-3 shadow-lg">
                   {categories.map((c) => (
                     <Link
                       key={c.id}
                       href={`/category/${c.slug}`}
-                      className="rounded-lg px-3 py-2 text-sm text-ink-soft hover:bg-sand hover:text-ink"
+                      className="rounded-md px-3 py-2 text-sm text-ink-soft hover:bg-sand hover:text-ink"
                     >
                       {c.name}
                     </Link>
@@ -67,13 +67,13 @@ export async function Header() {
 
             <Link
               href="/happy-customers"
-              className="rounded-full px-3 py-2 text-sm hover:bg-sand"
+              className="rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wide hover:bg-sand"
             >
               Happy Customers
             </Link>
             <Link
               href="/#reviews"
-              className="rounded-full px-3 py-2 text-sm hover:bg-sand"
+              className="rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wide hover:bg-sand"
             >
               Reviews
             </Link>
