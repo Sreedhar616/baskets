@@ -50,7 +50,7 @@ export function InstagramReels({ posts }: { posts: InstagramPost[] }) {
 
   return (
     <div
-      className="no-scrollbar mx-auto max-w-[420px] snap-y snap-mandatory overflow-y-auto overscroll-contain rounded-3xl border border-border bg-cream"
+      className="no-scrollbar mx-auto max-w-[420px] snap-y snap-mandatory overflow-y-auto overscroll-contain rounded-lg border border-border bg-cream"
       style={{ height: "min(80vh, 720px)" }}
     >
       {posts.map((post) => (

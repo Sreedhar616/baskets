@@ -16,7 +16,7 @@ export function ProductCard({ product, className }: { product: Product; classNam
     <div className={cn("group flex flex-col", className)}>
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden rounded-2xl bg-sand"
+        className="relative block aspect-square overflow-hidden rounded-md bg-sand"
       >
         <Image
           src={image}
@@ -26,7 +26,7 @@ export function ProductCard({ product, className }: { product: Product; classNam
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {discount > 0 && (
-          <span className="absolute left-3 top-3 rounded-full bg-clay px-2.5 py-1 text-xs font-semibold text-primary-foreground">
+          <span className="absolute left-3 top-3 rounded-sm bg-sale px-2.5 py-1 text-xs font-semibold text-white">
             {discount}% off
           </span>
         )}

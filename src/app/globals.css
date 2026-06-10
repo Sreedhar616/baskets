@@ -19,6 +19,7 @@
   --color-sage: #4b5d4f;
   --color-sage-dark: #36443a;
   --color-gold: #b08d3a;
+  --color-sale: #e2231a;
   --color-border: #e4e4e4;
 
   /* Semantic aliases used across the app */
@@ -28,8 +29,8 @@
   --color-primary-foreground: #ffffff;
   --color-muted: var(--color-ink-soft);
 
-  /* Typography */
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  /* Typography — clean sans-serif throughout (Sephora-style) */
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Radii */
@@ -50,8 +51,8 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
   ::selection {
     background: color-mix(in srgb, var(--color-clay) 22%, transparent);

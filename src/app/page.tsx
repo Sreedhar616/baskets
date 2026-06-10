@@ -106,7 +106,7 @@ export default async function HomePage() {
 
       {/* ------------------------- Instagram CTA ------------------------ */}
       <section className="container-page pb-10">
-        <div className="overflow-hidden rounded-[2rem] bg-clay px-6 py-12 text-center text-cream md:py-16">
+        <div className="overflow-hidden rounded-lg bg-clay px-6 py-12 text-center text-cream md:py-16">
           <p className="eyebrow text-gold">@designsofds on Instagram</p>
           <h2 className="mt-3 text-3xl text-cream md:text-4xl">Our happy customers</h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-cream/80">

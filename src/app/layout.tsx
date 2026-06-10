@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { RecoveryListener } from "@/components/auth/recovery-listener";
 import { SITE } from "@/lib/constants";
 import { env } from "@/lib/env";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream">
+        <RecoveryListener />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

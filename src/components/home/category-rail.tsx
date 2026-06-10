@@ -13,7 +13,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
         <Link
           key={c.id}
           href={`/category/${c.slug}`}
-          className="group relative w-40 shrink-0 snap-start overflow-hidden rounded-2xl sm:w-48"
+          className="group relative w-40 shrink-0 snap-start overflow-hidden rounded-md sm:w-48"
         >
           <div className="relative aspect-[3/4] bg-sand">
             <Image
