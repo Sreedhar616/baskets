@@ -30,16 +30,17 @@ export default async function HomePage() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-ink/20" />
+          <div className="absolute inset-0 bg-ink/15" />
           <div className="container-page absolute inset-0 flex flex-col justify-center">
             <div className="max-w-xl text-cream">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">
                 Handmade · Premium · Made in India
               </p>
-              <h1 className="mt-4 text-4xl font-semibold uppercase leading-[1.05] tracking-tight md:text-6xl">
+              <h1 className="mt-4 text-4xl font-semibold uppercase leading-[1.02] tracking-tight drop-shadow-sm md:text-6xl">
                 Baskets &amp; bags,<br />woven by hand
               </h1>
-              <p className="mt-5 max-w-md text-sm text-cream/85 md:text-base">
+              <p className="mt-5 max-w-md text-sm text-cream/90 md:text-base">
                 Beautifully crafted Chettinad, picnic, pooja and designer sets —
                 durable, vibrant and made to last. Free shipping over ₹999.
               </p>
