@@ -21,14 +21,14 @@ export default async function HomePage() {
     <>
       {/* ---------------------- Editorial hero --------------------------- */}
       <section className="relative">
-        <div className="relative h-[78vh] min-h-[460px] w-full overflow-hidden">
+        <div className="relative h-[52vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
           <Image
             src="/products/7.jpg"
             alt="Handmade designer baskets by D's Designs"
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/30 to-transparent" />
           <div className="container-page absolute inset-0 flex flex-col justify-center">
