@@ -13,53 +13,60 @@ export function ProductCard({ product, className }: { product: Product; classNam
       : 0;
 
   return (
-    <div className={cn("group flex flex-col", className)}>
+    <div
+      className={cn(
+        "group flex flex-col border border-border bg-cream transition-shadow hover:shadow-md",
+        className
+      )}
+    >
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden rounded-md bg-white"
+        className="relative block aspect-square overflow-hidden bg-white"
       >
         <Image
           src={image}
           alt={product.name}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
         />
         {discount > 0 && (
-          <span className="absolute left-3 top-3 rounded-sm bg-sale px-2.5 py-1 text-xs font-semibold text-white">
-            {discount}% off
+          <span className="absolute left-2 top-2 bg-sale px-2 py-0.5 text-[11px] font-bold text-white">
+            -{discount}%
           </span>
         )}
         {product.stock <= 0 && (
-          <span className="absolute right-3 top-3 rounded-full bg-ink/80 px-2.5 py-1 text-xs font-medium text-cream">
+          <span className="absolute right-2 top-2 bg-ink/85 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-cream">
             Sold out
           </span>
         )}
       </Link>
 
-      <div className="mt-3 flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col p-3">
         {product.categoryName && (
-          <p className="text-xs text-ink-soft">{product.categoryName}</p>
+          <p className="text-[11px] font-medium uppercase tracking-wide text-ink-soft">
+            {product.categoryName}
+          </p>
         )}
-        <Link href={`/products/${product.slug}`} className="mt-0.5">
-          <h3 className="font-display text-lg leading-snug hover:text-clay">
+        <Link href={`/products/${product.slug}`} className="mt-1">
+          <h3 className="line-clamp-2 text-sm font-medium leading-snug hover:underline">
             {product.name}
           </h3>
         </Link>
 
-        <div className="mt-1 flex items-center gap-2">
-          <span className="text-base font-semibold">
-            {price.from && <span className="text-xs font-normal text-ink-soft">From </span>}
+        <div className="mt-2 flex items-baseline gap-2">
+          <span className="text-sm font-bold">
+            {price.from && <span className="text-[11px] font-normal text-ink-soft">From </span>}
             {formatINR(price.amount)}
           </span>
           {product.comparePrice && product.comparePrice > price.amount && (
-            <span className="text-sm text-ink-soft line-through">
+            <span className="text-xs text-ink-soft line-through">
               {formatINR(product.comparePrice)}
             </span>
           )}
         </div>
 
-        <div className="mt-3">
+        <div className="mt-3 pt-1">
           <AddToCartButton product={product} size="sm" className="w-full" />
         </div>
       </div>

@@ -135,7 +135,7 @@ export default async function ProductPage({
       {related.filter((p) => p.id !== product.id).length > 0 && (
         <section className="mt-20">
           <h2 className="text-2xl md:text-3xl">You may also like</h2>
-          <div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
             {related
               .filter((p) => p.id !== product.id)
               .slice(0, 4)

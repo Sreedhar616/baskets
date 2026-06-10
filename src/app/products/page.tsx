@@ -64,7 +64,7 @@ export default async function ProductsPage({
           No products found{q ? ` for “${q}”` : ""}. Try another category.
         </p>
       ) : (
-        <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
           {products.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

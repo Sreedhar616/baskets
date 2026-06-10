@@ -79,26 +79,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --------------------- Promo tiles (editorial) ------------------ */}
-      <section className="container-page py-12 md:py-16">
-        <div className="grid gap-4 md:grid-cols-2">
-          <PromoTile
-            image="/products/1.jpg"
-            eyebrow="Best sellers"
-            title="The Chettinad edit"
-            href="/products"
-          />
-          <PromoTile
-            image="/products/8.jpg"
-            eyebrow="New season"
-            title="Pooja & festive"
-            href="/products"
-          />
-        </div>
-      </section>
-
       {/* -------------------- Categories (side-scroll) ------------------ */}
-      <section id="categories" className="container-page scroll-mt-24 pb-4 md:pb-8">
+      <section id="categories" className="container-page scroll-mt-24 py-10 md:py-14">
         <div className="flex items-end justify-between">
           <div>
             <p className="eyebrow">Shop by category</p>
@@ -123,7 +105,7 @@ export default async function HomePage() {
               View all →
             </Link>
           </div>
-          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-5 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
             {showcase.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -183,44 +165,5 @@ export default async function HomePage() {
         </div>
       </section>
     </>
-  );
-}
-
-/** Editorial promo tile — full-bleed image with overlaid label. */
-function PromoTile({
-  image,
-  eyebrow,
-  title,
-  href,
-}: {
-  image: string;
-  eyebrow: string;
-  title: string;
-  href: string;
-}) {
-  return (
-    <Link href={href} className="group relative block overflow-hidden rounded-lg">
-      <div className="relative aspect-[4/3] md:aspect-[16/10]">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-        <div className="absolute bottom-0 left-0 p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream/85">
-            {eyebrow}
-          </p>
-          <h3 className="mt-1 text-2xl uppercase tracking-tight text-cream md:text-3xl">
-            {title}
-          </h3>
-          <span className="mt-2 inline-block text-xs font-medium uppercase tracking-wide text-cream underline underline-offset-4">
-            Shop the edit
-          </span>
-        </div>
-      </div>
-    </Link>
   );
 }
