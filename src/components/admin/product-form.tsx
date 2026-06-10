@@ -32,17 +32,20 @@ export function ProductForm({
   const [available, setAvailable] = useState<boolean>(
     product ? product.stock > 0 : true
   );
-  // Size variants (label + price in rupees). Empty list = product has no sizes.
+  // Size variants (label + online/cod price in rupees). Empty = no sizes.
   const initialSizes = (product?.sizes ?? []).map((s) => ({
     label: s.label,
-    price: String(s.price / 100),
+    online: String(s.online / 100),
+    cod: String(s.cod / 100),
   }));
-  const [sizes, setSizes] = useState<{ label: string; price: string }[]>(initialSizes);
+  const [sizes, setSizes] = useState<{ label: string; online: string; cod: string }[]>(
+    initialSizes
+  );
 
   function addSize() {
-    setSizes((prev) => [...prev, { label: "", price: "" }]);
+    setSizes((prev) => [...prev, { label: "", online: "", cod: "" }]);
   }
-  function updateSize(i: number, key: "label" | "price", value: string) {
+  function updateSize(i: number, key: "label" | "online" | "cod", value: string) {
     setSizes((prev) => prev.map((s, idx) => (idx === i ? { ...s, [key]: value } : s)));
   }
   function removeSize(i: number) {
@@ -97,12 +100,17 @@ export function ProductForm({
       slug: slugify(String(fd.get("slug")) || String(fd.get("name"))),
       categoryId: (fd.get("categoryId") as string) || null,
       priceRupees: Number(fd.get("price")),
+      codPriceRupees: Number(fd.get("codPrice")) || Number(fd.get("price")),
       comparePriceRupees: fd.get("comparePrice") ? Number(fd.get("comparePrice")) : null,
       description: String(fd.get("description") || ""),
       images,
       sizes: sizes
         .filter((s) => s.label.trim() !== "")
-        .map((s) => ({ label: s.label.trim(), priceRupees: Number(s.price) || 0 })),
+        .map((s) => ({
+          label: s.label.trim(),
+          onlineRupees: Number(s.online) || 0,
+          codRupees: Number(s.cod) || Number(s.online) || 0,
+        })),
       // In stock → a non-zero value; out of stock → 0. We no longer count units.
       stock: available ? 1 : 0,
       isActive: fd.get("isActive") === "on",
@@ -149,10 +157,14 @@ export function ProductForm({
         </select>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div>
-          <label className={LABEL}>Price (₹)</label>
+          <label className={LABEL}>Online price (₹)</label>
           <input name="price" type="number" min="0" step="1" required className={FIELD} defaultValue={product ? product.price / 100 : ""} />
+        </div>
+        <div>
+          <label className={LABEL}>COD price (₹)</label>
+          <input name="codPrice" type="number" min="0" step="1" className={FIELD} defaultValue={product ? product.codPrice / 100 : ""} placeholder="same as online" />
         </div>
         <div>
           <label className={LABEL}>Compare price (₹, optional)</label>
@@ -165,7 +177,7 @@ export function ProductForm({
         <label className={LABEL}>Sizes (optional)</label>
         <p className="-mt-1 mb-2 text-xs text-ink-soft">
           Add sizes only if this product has them (e.g. bags). Each size has its own
-          price. Leave empty to sell at the price above with no size choice.
+          Online and COD price. Leave empty to sell at the prices above with no size choice.
         </p>
         <div className="space-y-2">
           {sizes.map((s, i) => (
@@ -177,13 +189,22 @@ export function ProductForm({
                 onChange={(e) => updateSize(i, "label", e.target.value)}
               />
               <input
-                placeholder="Price ₹"
+                placeholder="Online ₹"
                 type="number"
                 min="0"
                 step="1"
-                className={cn(FIELD, "w-32")}
-                value={s.price}
-                onChange={(e) => updateSize(i, "price", e.target.value)}
+                className={cn(FIELD, "w-24")}
+                value={s.online}
+                onChange={(e) => updateSize(i, "online", e.target.value)}
+              />
+              <input
+                placeholder="COD ₹"
+                type="number"
+                min="0"
+                step="1"
+                className={cn(FIELD, "w-24")}
+                value={s.cod}
+                onChange={(e) => updateSize(i, "cod", e.target.value)}
               />
               <button
                 type="button"

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getInstagramPosts, getSettings } from "@/lib/queries";
-import { InstagramGrid } from "@/components/instagram/instagram-embed";
+import { InstagramReels } from "@/components/instagram/instagram-embed";
 import { InstagramIcon } from "@/components/ui/icons";
 import { buttonClasses } from "@/components/ui/button";
 
@@ -24,7 +24,7 @@ export default async function HappyCustomersPage() {
         <p className="eyebrow">@designsofds</p>
         <h1 className="mt-2 text-4xl md:text-5xl">Happy Customers</h1>
         <p className="mt-4 text-ink-soft">
-          We love seeing our baskets out in the world. Here are some of our
+          We love seeing our baskets out in the world. Swipe through some of our
           favourite moments shared by customers on Instagram.
         </p>
         <a
@@ -37,8 +37,9 @@ export default async function HappyCustomersPage() {
         </a>
       </header>
 
-      <div className="mt-12">
-        <InstagramGrid posts={posts} />
+      <div className="mt-10">
+        <InstagramReels posts={posts} />
+        <p className="mt-3 text-center text-xs text-ink-soft">Swipe up for more ↑</p>
       </div>
 
       <div className="mt-16 rounded-[2rem] bg-sand p-10 text-center">

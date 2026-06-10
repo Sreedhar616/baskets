@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
-import { useCart } from "@/lib/cart-store";
+import { useCart, unitPriceFor } from "@/lib/cart-store";
 import { buttonClasses } from "@/components/ui/button";
 import { formatINR, cn } from "@/lib/utils";
 import { computeTotals } from "@/lib/pricing";
@@ -52,8 +52,6 @@ const FIELD =
 export function CheckoutForm({ settings }: { settings: SiteSettings }) {
   const router = useRouter();
   const { items, clear } = useCart();
-  const subtotal = useCart((s) => s.subtotal());
-  const totals = computeTotals(subtotal, settings);
 
   const [form, setForm] = useState({
     name: "",
@@ -71,6 +69,10 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Totals reflect the selected payment method (COD vs Online prices differ).
+  const subtotal = useCart((s) => s.subtotalFor(method));
+  const totals = computeTotals(subtotal, settings);
 
   function update(k: keyof typeof form, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -245,7 +247,7 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
                   {i.name}
                   {i.size && <span className="text-ink-soft"> ({i.size})</span>} × {i.quantity}
                 </span>
-                <span>{formatINR(i.price * i.quantity)}</span>
+                <span>{formatINR(unitPriceFor(i, method) * i.quantity)}</span>
               </li>
             ))}
           </ul>

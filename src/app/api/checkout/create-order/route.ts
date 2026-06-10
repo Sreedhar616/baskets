@@ -50,8 +50,8 @@ export async function POST(request: Request) {
   if (paymentMethod === "razorpay" && !settings.onlinePaymentEnabled)
     return bad("Online payment is currently unavailable");
 
-  // Server-authoritative pricing.
-  const draft = await buildOrderDraft(items);
+  // Server-authoritative pricing (priced for the chosen payment method).
+  const draft = await buildOrderDraft(items, paymentMethod);
   if (!draft.items.length) return bad("None of the items are available");
 
   // Attach the logged-in user, if any.

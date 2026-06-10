@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 
 export function CartView({ settings }: { settings: SiteSettings }) {
   const { items, setQuantity, removeItem } = useCart();
-  const subtotal = useCart((s) => s.subtotal());
+  // Cart shows online prices; the COD/Online choice (and any price change) is at checkout.
+  const subtotal = useCart((s) => s.subtotalFor("razorpay"));
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -76,7 +77,7 @@ export function CartView({ settings }: { settings: SiteSettings }) {
                     <Trash2 size={18} />
                   </button>
                 </div>
-                <p className="mt-1 text-sm text-ink-soft">{formatINR(item.price)} each</p>
+                <p className="mt-1 text-sm text-ink-soft">{formatINR(item.online)} each</p>
 
                 <div className="mt-auto flex items-center justify-between pt-3">
                   <div className="flex items-center rounded-full border border-ink/20">
@@ -96,7 +97,7 @@ export function CartView({ settings }: { settings: SiteSettings }) {
                       <Plus size={14} />
                     </button>
                   </div>
-                  <span className="font-semibold">{formatINR(item.price * item.quantity)}</span>
+                  <span className="font-semibold">{formatINR(item.online * item.quantity)}</span>
                 </div>
               </div>
             </li>

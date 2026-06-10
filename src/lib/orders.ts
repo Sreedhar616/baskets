@@ -35,25 +35,39 @@ interface ResolvedItem {
   size: string | null;
 }
 
-/** Pick the authoritative price for a chosen size, falling back to base price. */
+/**
+ * Pick the authoritative price (paise) for a chosen size and payment method,
+ * falling back to the product's base online/cod price. Tolerant of the older
+ * size shape { label, price }.
+ */
 function priceForSize(
-  basePrice: number,
+  baseOnline: number,
+  baseCod: number,
   sizes: unknown,
-  chosen: string | null | undefined
+  chosen: string | null | undefined,
+  method: PaymentMethod
 ): { price: number; label: string | null } {
   const list = Array.isArray(sizes) ? (sizes as Array<Record<string, unknown>>) : [];
-  if (!list.length) return { price: basePrice, label: null };
+  if (!list.length) {
+    return { price: method === "cod" ? baseCod : baseOnline, label: null };
+  }
   // Match the chosen size by label; default to the first size when none chosen.
   const match =
     (chosen != null && list.find((s) => String(s.label) === chosen)) || list[0];
-  return { price: Number(match.price ?? basePrice), label: String(match.label) };
+  const fallback = Number(match.price ?? (method === "cod" ? baseCod : baseOnline));
+  const price = method === "cod" ? Number(match.cod ?? fallback) : Number(match.online ?? fallback);
+  return { price, label: String(match.label) };
 }
 
 /**
  * Resolve cart items against authoritative product data (DB when configured,
- * otherwise local sample data). Never trusts client-supplied prices.
+ * otherwise local sample data). Never trusts client-supplied prices; prices the
+ * order for the chosen payment method (COD vs Online).
  */
-async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
+async function resolveItems(
+  items: CartInput[],
+  method: PaymentMethod
+): Promise<ResolvedItem[]> {
   const wanted = items
     .filter((i) => i.productId && i.quantity > 0)
     .map((i) => ({
@@ -70,7 +84,7 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
     const supabase = await createClient();
     const { data } = await supabase
       .from("products")
-      .select("id, name, price, images, sizes, stock, is_active")
+      .select("id, name, price, cod_price, images, sizes, stock, is_active")
       .in(
         "id",
         wanted.map((w) => w.productId)
@@ -82,8 +96,14 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
       // Availability is on/off: stock > 0 means buyable at any quantity.
       if (Number(p.stock) <= 0) continue;
       const qty = w.quantity;
-      // Authoritative per-size price (never trusts a client-supplied price).
-      const { price, label } = priceForSize(Number(p.price), p.sizes, w.size);
+      // Authoritative per-size, per-method price (never trusts a client price).
+      const { price, label } = priceForSize(
+        Number(p.price),
+        Number(p.cod_price ?? p.price),
+        p.sizes,
+        w.size,
+        method
+      );
       out.push({
         productId: String(p.id),
         name: String(p.name),
@@ -104,7 +124,7 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
     if (!p) continue;
     if (p.stock <= 0) continue;
     const qty = w.quantity;
-    const { price, label } = priceForSize(p.price, p.sizes, w.size);
+    const { price, label } = priceForSize(p.price, p.codPrice, p.sizes, w.size, method);
     out.push({
       productId: p.id,
       name: p.name,
@@ -128,8 +148,11 @@ export interface OrderDraft {
 }
 
 /** Build a priced order draft from cart input using current shipping rules. */
-export async function buildOrderDraft(items: CartInput[]): Promise<OrderDraft> {
-  const resolved = await resolveItems(items);
+export async function buildOrderDraft(
+  items: CartInput[],
+  method: PaymentMethod
+): Promise<OrderDraft> {
+  const resolved = await resolveItems(items, method);
   const subtotal = resolved.reduce((s, i) => s + i.lineTotal, 0);
   const settings = await getSettings();
   const totals = computeTotals(subtotal, settings);

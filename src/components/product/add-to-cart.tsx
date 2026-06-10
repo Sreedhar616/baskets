@@ -75,7 +75,7 @@ export function AddToCartButton({
                     : "border-ink/20 hover:bg-sand"
                 )}
               >
-                {s.label} · {formatINR(s.price)}
+                {s.label} · {formatINR(s.online)}
               </button>
             ))}
           </div>

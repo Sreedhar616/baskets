@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatINR, cn } from "@/lib/utils";
+import { formatINR, cn, displayPrice } from "@/lib/utils";
 import type { Product } from "@/types/db";
 import { AddToCartButton } from "./add-to-cart";
 
 export function ProductCard({ product, className }: { product: Product; className?: string }) {
   const image = product.images[0] ?? "/products/1.jpg";
+  const price = displayPrice(product);
   const discount =
-    product.comparePrice && product.comparePrice > product.price
-      ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100)
+    product.comparePrice && product.comparePrice > price.amount
+      ? Math.round(((product.comparePrice - price.amount) / product.comparePrice) * 100)
       : 0;
 
   return (
@@ -47,8 +48,11 @@ export function ProductCard({ product, className }: { product: Product; classNam
         </Link>
 
         <div className="mt-1 flex items-center gap-2">
-          <span className="text-base font-semibold">{formatINR(product.price)}</span>
-          {product.comparePrice && product.comparePrice > product.price && (
+          <span className="text-base font-semibold">
+            {price.from && <span className="text-xs font-normal text-ink-soft">From </span>}
+            {formatINR(price.amount)}
+          </span>
+          {product.comparePrice && product.comparePrice > price.amount && (
             <span className="text-sm text-ink-soft line-through">
               {formatINR(product.comparePrice)}
             </span>

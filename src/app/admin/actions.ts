@@ -24,12 +24,15 @@ export interface ProductInput {
   name: string;
   slug: string;
   categoryId: string | null;
+  /** base ONLINE price in rupees */
   priceRupees: number;
+  /** base COD price in rupees */
+  codPriceRupees: number;
   comparePriceRupees?: number | null;
   description?: string | null;
   images: string[];
-  /** size variants with prices in rupees; empty = no sizes */
-  sizes?: { label: string; priceRupees: number }[];
+  /** size variants with online + cod prices in rupees; empty = no sizes */
+  sizes?: { label: string; onlineRupees: number; codRupees: number }[];
   stock: number;
   isActive: boolean;
   isFeatured: boolean;
@@ -42,6 +45,7 @@ export async function saveProduct(input: ProductInput) {
     slug: input.slug,
     category_id: input.categoryId,
     price: rupeesToPaise(input.priceRupees),
+    cod_price: rupeesToPaise(input.codPriceRupees || input.priceRupees),
     compare_price:
       input.comparePriceRupees != null && input.comparePriceRupees > 0
         ? rupeesToPaise(input.comparePriceRupees)
@@ -50,7 +54,11 @@ export async function saveProduct(input: ProductInput) {
     images: input.images,
     sizes: (input.sizes ?? [])
       .filter((s) => s.label.trim() !== "")
-      .map((s) => ({ label: s.label.trim(), price: rupeesToPaise(s.priceRupees) })),
+      .map((s) => ({
+        label: s.label.trim(),
+        online: rupeesToPaise(s.onlineRupees),
+        cod: rupeesToPaise(s.codRupees || s.onlineRupees),
+      })),
     stock: Math.max(0, Math.floor(input.stock)),
     is_active: input.isActive,
     is_featured: input.isFeatured,

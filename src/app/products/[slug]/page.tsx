@@ -47,7 +47,7 @@ export default async function ProductPage({
 
   const hasSizes = product.sizes.length > 0;
   const displayPrice = hasSizes
-    ? Math.min(...product.sizes.map((s) => s.price))
+    ? Math.min(...product.sizes.map((s) => s.online))
     : product.price;
 
   const waMsg = `Hi! I'm interested in "${product.name}" (${formatINR(product.price)}). Is it available?`;

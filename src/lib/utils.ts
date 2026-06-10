@@ -35,6 +35,22 @@ export function slugify(input: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+/**
+ * The price (paise) to display for a product card/page. When the product has
+ * sizes, use the lowest online size price; otherwise the base online price.
+ * `from` is true when multiple sizes mean the price is a starting price.
+ */
+export function displayPrice(product: {
+  price: number;
+  sizes: { online: number }[];
+}): { amount: number; from: boolean } {
+  if (product.sizes.length) {
+    const min = Math.min(...product.sizes.map((s) => s.online));
+    return { amount: min, from: product.sizes.length > 1 };
+  }
+  return { amount: product.price, from: false };
+}
+
 /** Build a wa.me click-to-chat link with a pre-filled message. */
 export function whatsappLink(phone: string, message: string): string {
   // Normalise to digits only; assume India (+91) when a bare 10-digit number is given.

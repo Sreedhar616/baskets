@@ -28,11 +28,16 @@ export interface Category {
   isActive: boolean;
 }
 
-/** An optional size variant of a product, e.g. { label: "Large", price: 69900 }. */
+/**
+ * An optional size variant with its own Online and COD price (both paise),
+ * e.g. { label: "Large", online: 69900, cod: 72900 }.
+ */
 export interface ProductSize {
   label: string;
-  /** price in paise for this size */
-  price: number;
+  /** online/prepaid price in paise */
+  online: number;
+  /** cash-on-delivery price in paise */
+  cod: number;
 }
 
 export interface Product {
@@ -43,8 +48,10 @@ export interface Product {
   name: string;
   slug: string;
   description: string | null;
-  /** price in paise (base price; used when there are no sizes) */
+  /** base ONLINE price in paise (used when there are no sizes) */
   price: number;
+  /** base COD price in paise (used when there are no sizes) */
+  codPrice: number;
   /** optional MRP/strike-through price in paise */
   comparePrice: number | null;
   images: string[];
@@ -97,10 +104,12 @@ export interface CartItem {
   name: string;
   /** chosen size label, or null when the product has no sizes */
   size: string | null;
-  price: number; // paise (display only; re-priced server-side)
+  /** online price in paise (display only; re-priced server-side) */
+  online: number;
+  /** cod price in paise (display only; re-priced server-side) */
+  cod: number;
   image: string | null;
   quantity: number;
-  stock: number;
 }
 
 export interface ShippingAddress {

@@ -31,25 +31,32 @@ function useInstagramEmbeds(count: number) {
 }
 
 /**
- * Renders curated Instagram posts. Uses the official embed (blockquote +
- * embed.js). Each card also links out so it degrades gracefully if a post
- * can't be embedded.
+ * TikTok-style vertical reel viewer: full-height scroll-snap panels, one reel
+ * per screen, smooth swipe between them. Uses the official Instagram embed.
+ *
+ * Note: Instagram embeds are sandboxed iframes, so we cannot programmatically
+ * play/pause them — "only one plays at a time" isn't controllable here. The
+ * snap layout keeps a single reel centred at a time, which is the best UX
+ * achievable without switching to self-hosted videos.
  */
-export function InstagramGrid({ posts }: { posts: InstagramPost[] }) {
+export function InstagramReels({ posts }: { posts: InstagramPost[] }) {
   useInstagramEmbeds(posts.length);
 
   if (!posts.length) {
     return (
-      <p className="text-center text-ink-soft">No posts yet — check back soon!</p>
+      <p className="text-center text-ink-soft">No reels yet — check back soon!</p>
     );
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      className="no-scrollbar mx-auto max-w-[420px] snap-y snap-mandatory overflow-y-auto overscroll-contain rounded-3xl border border-border bg-cream"
+      style={{ height: "min(80vh, 720px)" }}
+    >
       {posts.map((post) => (
-        <div
+        <section
           key={post.id}
-          className="overflow-hidden rounded-2xl border border-border bg-cream"
+          className="flex min-h-full snap-start snap-always items-center justify-center p-3"
         >
           <blockquote
             className="instagram-media"
@@ -67,12 +74,7 @@ export function InstagramGrid({ posts }: { posts: InstagramPost[] }) {
               View on Instagram
             </a>
           </blockquote>
-          {post.caption && (
-            <p className="border-t border-border px-4 py-3 text-sm text-ink-soft">
-              {post.caption}
-            </p>
-          )}
-        </div>
+        </section>
       ))}
     </div>
   );

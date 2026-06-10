@@ -20,6 +20,24 @@ import type {
 
 type Row = Record<string, unknown>;
 
+/**
+ * Map the products.sizes JSON into ProductSize[]. Tolerant of the older
+ * { label, price } shape: that price becomes both online and cod.
+ */
+export function mapSizes(raw: unknown): import("@/types/db").ProductSize[] {
+  if (!Array.isArray(raw)) return [];
+  return (raw as Array<Record<string, unknown>>)
+    .filter((s) => s && s.label != null)
+    .map((s) => {
+      const fallback = Number(s.price ?? 0);
+      return {
+        label: String(s.label),
+        online: Number(s.online ?? fallback),
+        cod: Number(s.cod ?? fallback),
+      };
+    });
+}
+
 function mapCategory(r: Row): Category {
   return {
     id: String(r.id),
@@ -43,13 +61,10 @@ function mapProduct(r: Row): Product {
     slug: String(r.slug),
     description: (r.description as string) ?? null,
     price: Number(r.price ?? 0),
+    codPrice: Number(r.cod_price ?? r.price ?? 0),
     comparePrice: r.compare_price != null ? Number(r.compare_price) : null,
     images: Array.isArray(r.images) ? (r.images as string[]) : [],
-    sizes: Array.isArray(r.sizes)
-      ? (r.sizes as Array<Record<string, unknown>>)
-          .filter((s) => s && s.label != null)
-          .map((s) => ({ label: String(s.label), price: Number(s.price ?? 0) }))
-      : [],
+    sizes: mapSizes(r.sizes),
     stock: Number(r.stock ?? 0),
     isActive: Boolean(r.is_active),
     isFeatured: Boolean(r.is_featured),
