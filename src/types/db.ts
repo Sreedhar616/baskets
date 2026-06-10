@@ -28,6 +28,13 @@ export interface Category {
   isActive: boolean;
 }
 
+/** An optional size variant of a product, e.g. { label: "Large", price: 69900 }. */
+export interface ProductSize {
+  label: string;
+  /** price in paise for this size */
+  price: number;
+}
+
 export interface Product {
   id: string;
   categoryId: string | null;
@@ -36,11 +43,13 @@ export interface Product {
   name: string;
   slug: string;
   description: string | null;
-  /** price in paise */
+  /** price in paise (base price; used when there are no sizes) */
   price: number;
   /** optional MRP/strike-through price in paise */
   comparePrice: number | null;
   images: string[];
+  /** optional size variants; empty array = product has no sizes */
+  sizes: ProductSize[];
   stock: number;
   isActive: boolean;
   isFeatured: boolean;
@@ -81,9 +90,13 @@ export interface SiteSettings {
 }
 
 export interface CartItem {
+  /** Unique cart line key: productId, plus the size label when one is chosen. */
+  key: string;
   productId: string;
   slug: string;
   name: string;
+  /** chosen size label, or null when the product has no sizes */
+  size: string | null;
   price: number; // paise (display only; re-priced server-side)
   image: string | null;
   quantity: number;

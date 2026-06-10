@@ -28,13 +28,33 @@ export function ProductForm({
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState(product?.name ?? "");
   const [slug, setSlug] = useState(product?.slug ?? "");
-  const [stock, setStock] = useState<number>(product?.stock ?? 0);
+  // Availability is a simple on/off switch. New products default to in stock.
+  const [available, setAvailable] = useState<boolean>(
+    product ? product.stock > 0 : true
+  );
+  // Size variants (label + price in rupees). Empty list = product has no sizes.
+  const initialSizes = (product?.sizes ?? []).map((s) => ({
+    label: s.label,
+    price: String(s.price / 100),
+  }));
+  const [sizes, setSizes] = useState<{ label: string; price: string }[]>(initialSizes);
+
+  function addSize() {
+    setSizes((prev) => [...prev, { label: "", price: "" }]);
+  }
+  function updateSize(i: number, key: "label" | "price", value: string) {
+    setSizes((prev) => prev.map((s, idx) => (idx === i ? { ...s, [key]: value } : s)));
+  }
+  function removeSize(i: number) {
+    setSizes((prev) => prev.filter((_, idx) => idx !== i));
+  }
 
   /** Reset every field back to the product's saved values (or blank for a new product). */
   function handleDiscard() {
     setName(product?.name ?? "");
     setSlug(product?.slug ?? "");
-    setStock(product?.stock ?? 0);
+    setAvailable(product ? product.stock > 0 : true);
+    setSizes(initialSizes);
     setImages(product?.images ?? []);
     setError(null);
     formRef.current?.reset();
@@ -80,7 +100,11 @@ export function ProductForm({
       comparePriceRupees: fd.get("comparePrice") ? Number(fd.get("comparePrice")) : null,
       description: String(fd.get("description") || ""),
       images,
-      stock,
+      sizes: sizes
+        .filter((s) => s.label.trim() !== "")
+        .map((s) => ({ label: s.label.trim(), priceRupees: Number(s.price) || 0 })),
+      // In stock → a non-zero value; out of stock → 0. We no longer count units.
+      stock: available ? 1 : 0,
       isActive: fd.get("isActive") === "on",
       isFeatured: fd.get("isFeatured") === "on",
     };
@@ -136,32 +160,68 @@ export function ProductForm({
         </div>
       </div>
 
+      {/* Sizes — optional. Leave empty for products sold without sizes. */}
       <div>
-        <label className={LABEL}>Stock</label>
-        <div className="flex items-center gap-2">
-          <input
-            name="stock"
-            type="number"
-            min="0"
-            step="1"
-            required
-            className={FIELD}
-            value={stock}
-            onChange={(e) => setStock(Math.max(0, Math.floor(Number(e.target.value) || 0)))}
-          />
+        <label className={LABEL}>Sizes (optional)</label>
+        <p className="-mt-1 mb-2 text-xs text-ink-soft">
+          Add sizes only if this product has them (e.g. bags). Each size has its own
+          price. Leave empty to sell at the price above with no size choice.
+        </p>
+        <div className="space-y-2">
+          {sizes.map((s, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <input
+                placeholder="Size (e.g. Small)"
+                className={cn(FIELD, "flex-1")}
+                value={s.label}
+                onChange={(e) => updateSize(i, "label", e.target.value)}
+              />
+              <input
+                placeholder="Price ₹"
+                type="number"
+                min="0"
+                step="1"
+                className={cn(FIELD, "w-32")}
+                value={s.price}
+                onChange={(e) => updateSize(i, "price", e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => removeSize(i)}
+                className="shrink-0 rounded-lg p-2 text-ink-soft hover:bg-sand hover:text-clay-dark"
+                aria-label="Remove size"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ))}
           <button
             type="button"
-            onClick={() => setStock(0)}
-            className={cn(buttonClasses("outline", "md"), "shrink-0 whitespace-nowrap")}
+            onClick={addSize}
+            className={cn(buttonClasses("outline", "sm"), "mt-1")}
           >
-            Mark out of stock
+            + Add size
           </button>
         </div>
-        {stock <= 0 && (
-          <p className="mt-1.5 text-xs text-red-600">
-            Shows as “Sold out” to customers. Enter a number above to restock.
-          </p>
-        )}
+      </div>
+
+      <div>
+        <label className={LABEL}>Availability</label>
+        <label className="flex items-center gap-3 rounded-xl border border-border bg-cream px-4 py-3 text-sm">
+          <input
+            type="checkbox"
+            checked={available}
+            onChange={(e) => setAvailable(e.target.checked)}
+            className="h-4 w-4 accent-clay"
+          />
+          <span>
+            {available ? (
+              <>In stock — customers can buy this</>
+            ) : (
+              <span className="text-red-600">Out of stock — shows “Sold out”, can’t be bought</span>
+            )}
+          </span>
+        </label>
       </div>
 
       <div>

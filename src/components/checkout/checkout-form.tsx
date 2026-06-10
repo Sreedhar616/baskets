@@ -92,7 +92,7 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
     setLoading(true);
     try {
       const payload = {
-        items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
+        items: items.map((i) => ({ productId: i.productId, quantity: i.quantity, size: i.size })),
         customer: { name: form.name, email: form.email, phone: form.phone },
         address: {
           line1: form.line1,
@@ -141,7 +141,7 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
         description: `Order ${data.orderNumber}`,
         order_id: data.razorpay.orderId,
         prefill: { name: form.name, email: form.email, contact: form.phone },
-        theme: { color: "#a85a3c" },
+        theme: { color: "#0f9b91" },
         handler: async (resp) => {
           const verify = await fetch("/api/checkout/verify", {
             method: "POST",
@@ -237,11 +237,14 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
           <h2 className="font-display text-xl">Your order</h2>
           <ul className="mt-4 space-y-3">
             {items.map((i) => (
-              <li key={i.productId} className="flex items-center gap-3 text-sm">
+              <li key={i.key} className="flex items-center gap-3 text-sm">
                 <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-cream">
                   <Image src={i.image ?? "/products/1.jpg"} alt={i.name} fill sizes="48px" className="object-cover" />
                 </div>
-                <span className="flex-1">{i.name} × {i.quantity}</span>
+                <span className="flex-1">
+                  {i.name}
+                  {i.size && <span className="text-ink-soft"> ({i.size})</span>} × {i.quantity}
+                </span>
                 <span>{formatINR(i.price * i.quantity)}</span>
               </li>
             ))}

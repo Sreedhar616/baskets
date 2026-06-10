@@ -119,6 +119,7 @@ export const sampleProducts: Product[] = PRODUCT_SEED.map((p, i) => {
     price: p.price,
     comparePrice: p.comparePrice ?? null,
     images: cat.imageUrl ? [cat.imageUrl] : [],
+    sizes: [],
     stock: 25,
     isActive: true,
     isFeatured: Boolean(p.featured),

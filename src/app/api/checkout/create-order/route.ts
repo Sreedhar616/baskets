@@ -10,7 +10,7 @@ import type { PaymentMethod, ShippingAddress } from "@/types/db";
 export const runtime = "nodejs";
 
 interface Body {
-  items?: { productId: string; quantity: number }[];
+  items?: { productId: string; quantity: number; size?: string | null }[];
   customer?: { name?: string; email?: string; phone?: string };
   address?: Partial<ShippingAddress>;
   paymentMethod?: PaymentMethod;
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
       customerPhone: customer.phone,
       paymentMethod: "cod",
       items: draft.items.map((i) => ({
-        name: i.name,
+        name: i.size ? `${i.name} (${i.size})` : i.name,
         quantity: i.quantity,
         lineTotal: i.lineTotal,
       })),

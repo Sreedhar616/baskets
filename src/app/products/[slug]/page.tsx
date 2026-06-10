@@ -45,6 +45,11 @@ export default async function ProductPage({
       ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100)
       : 0;
 
+  const hasSizes = product.sizes.length > 0;
+  const displayPrice = hasSizes
+    ? Math.min(...product.sizes.map((s) => s.price))
+    : product.price;
+
   const waMsg = `Hi! I'm interested in "${product.name}" (${formatINR(product.price)}). Is it available?`;
 
   return (
@@ -71,13 +76,14 @@ export default async function ProductPage({
           <h1 className="mt-2 text-3xl md:text-4xl">{product.name}</h1>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <span className="text-2xl font-semibold">{formatINR(product.price)}</span>
-            {product.comparePrice && product.comparePrice > product.price && (
+            {hasSizes && <span className="text-lg text-ink-soft">From</span>}
+            <span className="text-2xl font-semibold">{formatINR(displayPrice)}</span>
+            {!hasSizes && product.comparePrice && product.comparePrice > product.price && (
               <span className="text-lg text-ink-soft line-through">
                 {formatINR(product.comparePrice)}
               </span>
             )}
-            {discount > 0 && (
+            {!hasSizes && discount > 0 && (
               <span className="rounded-full bg-clay/10 px-2.5 py-1 text-sm font-medium text-clay">
                 Save {discount}%
               </span>
@@ -91,9 +97,7 @@ export default async function ProductPage({
 
           <div className="mt-4 text-sm">
             {product.stock > 0 ? (
-              <span className="text-sage-dark">
-                {product.stock > 10 ? "In stock" : `Only ${product.stock} left`}
-              </span>
+              <span className="text-sage-dark">In stock</span>
             ) : (
               <span className="text-clay">Currently sold out</span>
             )}

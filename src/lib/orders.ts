@@ -13,6 +13,8 @@ import type {
 export interface CartInput {
   productId: string;
   quantity: number;
+  /** chosen size label, if the product has sizes */
+  size?: string | null;
 }
 
 export interface CustomerInput {
@@ -29,6 +31,22 @@ interface ResolvedItem {
   quantity: number;
   lineTotal: number;
   stock: number;
+  /** chosen size label, included in the order snapshot */
+  size: string | null;
+}
+
+/** Pick the authoritative price for a chosen size, falling back to base price. */
+function priceForSize(
+  basePrice: number,
+  sizes: unknown,
+  chosen: string | null | undefined
+): { price: number; label: string | null } {
+  const list = Array.isArray(sizes) ? (sizes as Array<Record<string, unknown>>) : [];
+  if (!list.length) return { price: basePrice, label: null };
+  // Match the chosen size by label; default to the first size when none chosen.
+  const match =
+    (chosen != null && list.find((s) => String(s.label) === chosen)) || list[0];
+  return { price: Number(match.price ?? basePrice), label: String(match.label) };
 }
 
 /**
@@ -38,7 +56,11 @@ interface ResolvedItem {
 async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
   const wanted = items
     .filter((i) => i.productId && i.quantity > 0)
-    .map((i) => ({ productId: i.productId, quantity: Math.floor(i.quantity) }));
+    .map((i) => ({
+      productId: i.productId,
+      quantity: Math.floor(i.quantity),
+      size: i.size ?? null,
+    }));
 
   if (!wanted.length) return [];
 
@@ -48,7 +70,7 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
     const supabase = await createClient();
     const { data } = await supabase
       .from("products")
-      .select("id, name, price, images, stock, is_active")
+      .select("id, name, price, images, sizes, stock, is_active")
       .in(
         "id",
         wanted.map((w) => w.productId)
@@ -57,17 +79,20 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
     for (const w of wanted) {
       const p = byId.get(w.productId);
       if (!p || !p.is_active) continue;
-      const qty = Math.min(w.quantity, Math.max(Number(p.stock), 0));
-      if (qty <= 0) continue;
-      const unitPrice = Number(p.price);
+      // Availability is on/off: stock > 0 means buyable at any quantity.
+      if (Number(p.stock) <= 0) continue;
+      const qty = w.quantity;
+      // Authoritative per-size price (never trusts a client-supplied price).
+      const { price, label } = priceForSize(Number(p.price), p.sizes, w.size);
       out.push({
         productId: String(p.id),
         name: String(p.name),
         image: Array.isArray(p.images) ? (p.images[0] ?? null) : null,
-        unitPrice,
+        unitPrice: price,
         quantity: qty,
-        lineTotal: unitPrice * qty,
+        lineTotal: price * qty,
         stock: Number(p.stock),
+        size: label,
       });
     }
     return out;
@@ -77,15 +102,18 @@ async function resolveItems(items: CartInput[]): Promise<ResolvedItem[]> {
   for (const w of wanted) {
     const p = sampleProducts.find((sp) => sp.id === w.productId);
     if (!p) continue;
-    const qty = Math.min(w.quantity, Math.max(p.stock, 1));
+    if (p.stock <= 0) continue;
+    const qty = w.quantity;
+    const { price, label } = priceForSize(p.price, p.sizes, w.size);
     out.push({
       productId: p.id,
       name: p.name,
       image: p.images[0] ?? null,
-      unitPrice: p.price,
+      unitPrice: price,
       quantity: qty,
-      lineTotal: p.price * qty,
+      lineTotal: price * qty,
       stock: p.stock,
+      size: label,
     });
   }
   return out;
@@ -185,7 +213,7 @@ export async function persistOrder({
   const itemsPayload = draft.items.map((i) => ({
     order_id: order.id,
     product_id: i.productId,
-    product_name: i.name,
+    product_name: i.size ? `${i.name} (${i.size})` : i.name,
     product_image: i.image,
     unit_price: i.unitPrice,
     quantity: i.quantity,
@@ -199,11 +227,6 @@ export async function persistOrder({
     throw new Error(`Failed to create order items: ${itemsError.message}`);
   }
 
-  // Best-effort stock decrement (COD confirms immediately).
-  if (paymentMethod === "cod") {
-    await decrementStock(supabase, draft.items);
-  }
-
   return {
     id: String(order.id),
     orderNumber: String(order.order_number),
@@ -211,23 +234,3 @@ export async function persistOrder({
   };
 }
 
-type AdminClient = ReturnType<typeof createAdminClient>;
-
-export async function decrementStock(
-  supabase: AdminClient,
-  items: { productId: string; quantity: number }[]
-) {
-  await Promise.all(
-    items.map(async ({ productId, quantity }) => {
-      const { data } = await supabase
-        .from("products")
-        .select("stock")
-        .eq("id", productId)
-        .single();
-      if (data) {
-        const next = Math.max(0, Number(data.stock) - quantity);
-        await supabase.from("products").update({ stock: next }).eq("id", productId);
-      }
-    })
-  );
-}

@@ -44,7 +44,7 @@ export function CartView({ settings }: { settings: SiteSettings }) {
         {/* Items */}
         <ul className="divide-y divide-border">
           {items.map((item) => (
-            <li key={item.productId} className="flex gap-4 py-5">
+            <li key={item.key} className="flex gap-4 py-5">
               <Link
                 href={`/products/${item.slug}`}
                 className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-sand"
@@ -62,9 +62,14 @@ export function CartView({ settings }: { settings: SiteSettings }) {
                 <div className="flex justify-between gap-3">
                   <Link href={`/products/${item.slug}`} className="font-display text-lg leading-snug hover:text-clay">
                     {item.name}
+                    {item.size && (
+                      <span className="ml-2 align-middle text-sm font-sans text-ink-soft">
+                        ({item.size})
+                      </span>
+                    )}
                   </Link>
                   <button
-                    onClick={() => removeItem(item.productId)}
+                    onClick={() => removeItem(item.key)}
                     aria-label="Remove"
                     className="text-ink-soft hover:text-clay"
                   >
@@ -77,7 +82,7 @@ export function CartView({ settings }: { settings: SiteSettings }) {
                   <div className="flex items-center rounded-full border border-ink/20">
                     <button
                       aria-label="Decrease"
-                      onClick={() => setQuantity(item.productId, item.quantity - 1)}
+                      onClick={() => setQuantity(item.key, item.quantity - 1)}
                       className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand"
                     >
                       <Minus size={14} />
@@ -85,7 +90,7 @@ export function CartView({ settings }: { settings: SiteSettings }) {
                     <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                     <button
                       aria-label="Increase"
-                      onClick={() => setQuantity(item.productId, item.quantity + 1)}
+                      onClick={() => setQuantity(item.key, item.quantity + 1)}
                       className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand"
                     >
                       <Plus size={14} />

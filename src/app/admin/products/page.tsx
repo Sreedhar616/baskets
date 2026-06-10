@@ -34,7 +34,8 @@ export default async function AdminProductsPage() {
                   {p.name}
                 </Link>
                 <p className="text-sm text-ink-soft">
-                  {p.categoryName ?? "Uncategorised"} · {formatINR(p.price)} · Stock {p.stock}
+                  {p.categoryName ?? "Uncategorised"} · {formatINR(p.price)} ·{" "}
+                  {p.stock > 0 ? "In stock" : "Out of stock"}
                 </p>
               </div>
               <div className="flex items-center gap-2">

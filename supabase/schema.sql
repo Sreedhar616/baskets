@@ -95,6 +95,7 @@ create table if not exists public.products (
   price         integer not null check (price >= 0),       -- paise
   compare_price integer check (compare_price >= 0),         -- optional MRP
   images        text[] not null default '{}',
+  sizes         jsonb not null default '[]',                -- [{label,price}] paise; [] = no sizes
   stock         integer not null default 0 check (stock >= 0),
   is_active     boolean not null default true,
   is_featured   boolean not null default false,
@@ -104,6 +105,8 @@ create table if not exists public.products (
 drop trigger if exists trg_products_updated on public.products;
 create trigger trg_products_updated before update on public.products
   for each row execute function public.set_updated_at();
+-- Adds the sizes column to databases created before sizes existed (safe to re-run).
+alter table public.products add column if not exists sizes jsonb not null default '[]';
 create index if not exists idx_products_slug on public.products(slug);
 create index if not exists idx_products_category on public.products(category_id);
 create index if not exists idx_products_active on public.products(is_active);

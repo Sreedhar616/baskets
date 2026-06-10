@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { hasServiceRole } from "@/lib/env";
 import { verifyPaymentSignature } from "@/lib/razorpay";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { decrementStock } from "@/lib/orders";
 import { sendOrderEmails } from "@/lib/notifications";
 import type { ShippingAddress } from "@/types/db";
 
@@ -71,14 +70,6 @@ export async function POST(request: Request) {
         .from("order_items")
         .select("product_id, product_name, unit_price, quantity, line_total")
         .eq("order_id", order.id);
-
-      await decrementStock(
-        supabase,
-        (items ?? []).map((i) => ({
-          productId: String(i.product_id),
-          quantity: Number(i.quantity),
-        }))
-      );
 
       await sendOrderEmails({
         orderNumber: order.order_number,

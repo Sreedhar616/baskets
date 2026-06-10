@@ -28,6 +28,8 @@ export interface ProductInput {
   comparePriceRupees?: number | null;
   description?: string | null;
   images: string[];
+  /** size variants with prices in rupees; empty = no sizes */
+  sizes?: { label: string; priceRupees: number }[];
   stock: number;
   isActive: boolean;
   isFeatured: boolean;
@@ -46,6 +48,9 @@ export async function saveProduct(input: ProductInput) {
         : null,
     description: input.description ?? null,
     images: input.images,
+    sizes: (input.sizes ?? [])
+      .filter((s) => s.label.trim() !== "")
+      .map((s) => ({ label: s.label.trim(), price: rupeesToPaise(s.priceRupees) })),
     stock: Math.max(0, Math.floor(input.stock)),
     is_active: input.isActive,
     is_featured: input.isFeatured,
