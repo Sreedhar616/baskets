@@ -34,6 +34,12 @@ export async function Header() {
           {/* Desktop nav */}
           <nav className="ml-2 hidden items-center gap-1 md:flex">
             <Link
+              href="/"
+              className="rounded-full px-3 py-2 text-sm hover:bg-sand"
+            >
+              Home
+            </Link>
+            <Link
               href="/products"
               className="rounded-full px-3 py-2 text-sm hover:bg-sand"
             >
@@ -77,7 +83,7 @@ export async function Header() {
             <Link
               href="/account"
               aria-label="Account"
-              className="hidden h-10 w-10 items-center justify-center rounded-full hover:bg-sand sm:inline-flex"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-sand"
             >
               <User size={20} />
             </Link>

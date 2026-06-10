@@ -62,6 +62,9 @@ export function MobileNav({ categories }: { categories: Category[] }) {
               </div>
 
               <nav className="mt-6 flex flex-col gap-1" onClick={() => setOpen(false)}>
+                <Link href="/" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
+                  Home
+                </Link>
                 <Link href="/products" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
                   All Products
                 </Link>
