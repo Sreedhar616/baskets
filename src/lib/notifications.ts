@@ -33,7 +33,7 @@ function customerHtml(d: OrderEmailData): string {
   const pay = d.paymentMethod === "cod" ? "Cash on Delivery" : "Paid online";
   return `
   <div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#26201b">
-    <h2 style="font-family:Georgia,serif;color:#c2552f">Thank you for your order!</h2>
+    <h2 style="font-family:Georgia,serif;color:#111111">Thank you for your order!</h2>
     <p>Hi ${d.customerName}, we've received your order <strong>${d.orderNumber}</strong> and will get it ready with care.</p>
     <table style="width:100%;border-collapse:collapse;margin:16px 0">
       ${itemsTable(d.items)}

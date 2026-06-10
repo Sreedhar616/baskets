@@ -143,7 +143,7 @@ export function CheckoutForm({ settings }: { settings: SiteSettings }) {
         description: `Order ${data.orderNumber}`,
         order_id: data.razorpay.orderId,
         prefill: { name: form.name, email: form.email, contact: form.phone },
-        theme: { color: "#c2552f" },
+        theme: { color: "#111111" },
         handler: async (resp) => {
           const verify = await fetch("/api/checkout/verify", {
             method: "POST",
