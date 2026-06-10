@@ -10,14 +10,14 @@ export function Gallery({ images, alt }: { images: string[]; alt: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative aspect-square overflow-hidden rounded-3xl bg-sand">
+      <div className="relative aspect-square overflow-hidden rounded-lg border border-border bg-white">
         <Image
           src={pics[active]}
           alt={alt}
           fill
           priority
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
 
@@ -29,11 +29,11 @@ export function Gallery({ images, alt }: { images: string[]; alt: string }) {
               onClick={() => setActive(i)}
               aria-label={`View image ${i + 1}`}
               className={cn(
-                "relative h-20 w-20 overflow-hidden rounded-xl bg-sand ring-2 transition",
-                i === active ? "ring-clay" : "ring-transparent hover:ring-border"
+                "relative h-20 w-20 overflow-hidden rounded-md bg-white ring-1 transition",
+                i === active ? "ring-clay" : "ring-border hover:ring-ink/40"
               )}
             >
-              <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+              <Image src={src} alt="" fill sizes="80px" className="object-contain" />
             </button>
           ))}
         </div>

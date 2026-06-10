@@ -16,7 +16,7 @@ export function ProductCard({ product, className }: { product: Product; classNam
     <div className={cn("group flex flex-col", className)}>
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden rounded-md bg-sand"
+        className="relative block aspect-square overflow-hidden rounded-md bg-white"
       >
         <Image
           src={image}
