@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants";
 import { buttonClasses } from "@/components/ui/button";
 import { ProductCard } from "@/components/product/product-card";
 import { CategoryRail } from "@/components/home/category-rail";
+import { HomeHero } from "@/components/home/home-hero";
 import { ReviewsSection } from "@/components/home/reviews-section";
 import { WhatsAppIcon } from "@/components/ui/icons";
 
@@ -19,49 +20,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ---------------------- Editorial hero --------------------------- */}
-      <section className="relative">
-        <div className="relative h-[52vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
-          <Image
-            src="/products/7.jpg"
-            alt="Handmade designer baskets by D's Designs"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-ink/20" />
-          <div className="absolute inset-0 bg-ink/15" />
-          <div className="container-page absolute inset-0 flex flex-col justify-center">
-            <div className="max-w-xl text-cream">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">
-                Handmade · Premium · Made in India
-              </p>
-              <h1 className="mt-4 text-4xl font-semibold uppercase leading-[1.02] tracking-tight drop-shadow-sm md:text-6xl">
-                Baskets &amp; bags,<br />woven by hand
-              </h1>
-              <p className="mt-5 max-w-md text-sm text-cream/90 md:text-base">
-                Beautifully crafted Chettinad, picnic, pooja and designer sets —
-                durable, vibrant and made to last. Free shipping over ₹999.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/products"
-                  className={buttonClasses("primary", "lg", "bg-cream text-ink hover:bg-cream/90")}
-                >
-                  Shop now <ArrowRight size={18} />
-                </Link>
-                <Link
-                  href="/#categories"
-                  className={buttonClasses("outline", "lg", "border-cream text-cream hover:bg-cream hover:text-ink")}
-                >
-                  Browse categories
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ---------------------- Illustration hero ----------------------- */}
+      <HomeHero />
 
       {/* --------------------------- Trust band ------------------------- */}
       <section className="border-b border-border bg-ink text-cream">

@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { User, ChevronDown, Search } from "lucide-react";
+import { User, ChevronDown } from "lucide-react";
 import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { MobileNav } from "./mobile-nav";
+import { SearchBox } from "./search-box";
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/icons";
 
 export async function Header() {
@@ -45,13 +46,9 @@ export async function Header() {
           {/* Left: mobile menu / desktop search */}
           <div className="flex flex-1 items-center">
             <MobileNav categories={categories} />
-            <Link
-              href="/products"
-              aria-label="Search products"
-              className="hidden h-10 w-10 items-center justify-center rounded-full hover:bg-sand md:inline-flex"
-            >
-              <Search size={20} />
-            </Link>
+            <div className="hidden md:block">
+              <SearchBox />
+            </div>
           </div>
 
           {/* Center: brand wordmark */}
