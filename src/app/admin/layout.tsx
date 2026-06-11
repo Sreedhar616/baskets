@@ -62,28 +62,9 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-sand">
-      {/* Mobile nav: vertical full-width, sticky */}
-      <nav className="sticky top-0 z-40 border-b border-border bg-cream md:hidden">
-        <div className="container-page flex items-center justify-between py-3">
-          <p className="eyebrow">Admin</p>
-          <div className="flex gap-1 overflow-x-auto">
-            {NAV.slice(0, 3).map(({ href, label, icon: Icon }) => (
-              <Link
-                key={href}
-                href={href}
-                className="flex shrink-0 items-center justify-center rounded-lg p-2 hover:bg-sand"
-                title={label}
-              >
-                <Icon size={20} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </nav>
-
       <div className="container-page grid gap-6 py-6 md:gap-8 md:py-8 md:grid-cols-[200px_1fr]">
-        {/* Desktop sidebar: vertical */}
-        <aside className="hidden md:block md:sticky md:top-24 md:h-fit">
+        {/* Mobile & Desktop sidebar: vertical */}
+        <aside className="md:sticky md:top-24 md:h-fit">
           <p className="eyebrow">Admin</p>
           <nav className="mt-4 flex flex-col gap-1">
             {NAV.map(({ href, label, icon: Icon }) => (
@@ -92,14 +73,14 @@ export default async function AdminLayout({
                 href={href}
                 className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm hover:bg-sand transition-colors"
               >
-                <Icon size={18} /> {label}
+                <Icon size={18} /> <span className="truncate">{label}</span>
               </Link>
             ))}
             <Link
               href="/"
               className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-sand transition-colors"
             >
-              <Home size={18} /> View site
+              <Home size={18} /> <span className="truncate">View site</span>
             </Link>
           </nav>
         </aside>
