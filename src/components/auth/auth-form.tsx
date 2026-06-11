@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
@@ -13,7 +13,6 @@ const FIELD =
   "w-full rounded-xl border border-border bg-cream px-4 py-3 text-sm outline-none focus:border-clay";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
-  const router = useRouter();
   const params = useSearchParams();
   const next = params.get("next") || "/account";
   const configured = isSupabaseConfigured();
@@ -48,8 +47,9 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         });
         if (error) throw error;
         if (data.session) {
-          router.push(next);
-          router.refresh();
+          // Hard navigation so the server picks up the new auth cookies.
+          window.location.assign(next);
+          return;
         } else {
           setInfo("Check your email to confirm your account, then sign in.");
         }
@@ -59,8 +59,9 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           password: form.password,
         });
         if (error) throw error;
-        router.push(next);
-        router.refresh();
+        // Hard navigation so the server picks up the new auth cookies.
+        window.location.assign(next);
+        return;
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Authentication failed");

@@ -39,7 +39,13 @@ export default async function AdminOrderDetail({
 
       {/* Quick actions */}
       <div className="mt-4">
-        <OrderActions orderId={order.id} status={order.status} />
+        <OrderActions
+          orderId={order.id}
+          status={order.status}
+          orderNumber={order.orderNumber}
+          customerName={order.customerName}
+          customerPhone={order.customerPhone}
+        />
       </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">

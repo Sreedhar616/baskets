@@ -5,20 +5,26 @@ import { useTransition, useState } from "react";
 import { Loader2, Truck, XCircle, Trash2 } from "lucide-react";
 import { updateOrderStatus, deleteOrder } from "@/app/admin/actions";
 import { buttonClasses } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, whatsappLink } from "@/lib/utils";
 
 /**
  * Order management buttons:
- * - Mark Delivered → status "delivered" (the customer-facing completed state)
- * - Cancel order   → status "cancelled"
+ * - Mark Delivered → status "delivered" + opens WhatsApp to tell the customer
+ * - Cancel order   → status "cancelled" + opens WhatsApp to tell the customer
  * - Delete         → removes the order permanently from history
  */
 export function OrderActions({
   orderId,
   status,
+  orderNumber,
+  customerName,
+  customerPhone,
 }: {
   orderId: string;
   status: string;
+  orderNumber: string;
+  customerName: string;
+  customerPhone: string;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
@@ -27,10 +33,29 @@ export function OrderActions({
   const delivered = status === "delivered";
   const cancelled = status === "cancelled";
 
-  function setStatus(next: string, key: string) {
-    setAction(key);
+  function notifyCustomer(message: string) {
+    window.open(whatsappLink(customerPhone, message), "_blank", "noopener,noreferrer");
+  }
+
+  function markDelivered() {
+    setAction("delivered");
     start(async () => {
-      await updateOrderStatus(orderId, next);
+      await updateOrderStatus(orderId, "delivered");
+      notifyCustomer(
+        `Hi ${customerName}, your D's Designs order ${orderNumber} has been delivered. Thank you for shopping with us!`
+      );
+      router.refresh();
+    });
+  }
+
+  function cancelOrder() {
+    if (!confirm("Cancel this order? The customer will be notified on WhatsApp.")) return;
+    setAction("cancelled");
+    start(async () => {
+      await updateOrderStatus(orderId, "cancelled");
+      notifyCustomer(
+        `Hi ${customerName}, your D's Designs order ${orderNumber} has been cancelled. Please contact us if you have any questions.`
+      );
       router.refresh();
     });
   }
@@ -52,7 +77,7 @@ export function OrderActions({
       <button
         type="button"
         disabled={pending || delivered}
-        onClick={() => setStatus("delivered", "delivered")}
+        onClick={markDelivered}
         className={cn(buttonClasses("primary", "sm"), "bg-sage-dark hover:bg-sage-dark/90")}
       >
         {busy("delivered") ? <Loader2 size={15} className="animate-spin" /> : <Truck size={15} />}
@@ -61,8 +86,8 @@ export function OrderActions({
 
       <button
         type="button"
-        disabled={pending || cancelled}
-        onClick={() => setStatus("cancelled", "cancelled")}
+        disabled={pending || cancelled || delivered}
+        onClick={cancelOrder}
         className={buttonClasses("outline", "sm")}
       >
         {busy("cancelled") ? <Loader2 size={15} className="animate-spin" /> : <XCircle size={15} />}

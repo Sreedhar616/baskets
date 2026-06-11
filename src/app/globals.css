@@ -2,25 +2,25 @@
 
 /*
   D's Designs — premium handmade baskets & bags.
-  "Sephora-style" palette: crisp white canvas, near-black ink and a bold
-  black accent. Minimal, high-contrast, lots of whitespace.
+  Warm artisan palette: soft cream canvas, deep brown-black ink and a
+  terracotta clay accent that echoes the handwoven baskets themselves.
 */
 @theme {
   /* Brand palette */
-  --color-cream: #ffffff;
-  --color-sand: #f6f6f6;
-  --color-linen: #ececec;
-  --color-ink: #111111;
-  --color-ink-soft: #6b6b6b;
-  /* Primary accent — bold black (kept under the `clay` name so the hundreds
-     of existing `clay` utility classes recolour in one place). */
-  --color-clay: #111111;
-  --color-clay-dark: #000000;
-  --color-sage: #4b5d4f;
-  --color-sage-dark: #36443a;
+  --color-cream: #fdfaf4;
+  --color-sand: #f6efe3;
+  --color-linen: #ede3d2;
+  --color-ink: #2b2118;
+  --color-ink-soft: #7a6a58;
+  /* Primary accent — terracotta clay (kept under the `clay` name so the
+     hundreds of existing `clay` utility classes recolour in one place). */
+  --color-clay: #a8552e;
+  --color-clay-dark: #8a4423;
+  --color-sage: #6d8260;
+  --color-sage-dark: #44573c;
   --color-gold: #b08d3a;
-  --color-sale: #e2231a;
-  --color-border: #e4e4e4;
+  --color-sale: #c93a2b;
+  --color-border: #e8ddc9;
 
   /* Semantic aliases used across the app */
   --color-background: var(--color-cream);

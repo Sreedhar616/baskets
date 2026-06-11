@@ -39,6 +39,16 @@ export default async function MyOrdersPage() {
                 </div>
                 <span className="text-lg font-semibold">{formatINR(Number(o.total))}</span>
               </div>
+              {o.status === "delivered" && (
+                <p className="mt-3 rounded-lg bg-sage/15 px-3 py-2 text-sm text-sage-dark">
+                  Your order has been delivered. Thank you for shopping with us!
+                </p>
+              )}
+              {o.status === "cancelled" && (
+                <p className="mt-3 rounded-lg bg-ink/5 px-3 py-2 text-sm text-ink-soft">
+                  This order was cancelled. Contact us on WhatsApp if you have any questions.
+                </p>
+              )}
             </li>
           ))}
         </ul>
