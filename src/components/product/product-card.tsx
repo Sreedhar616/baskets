@@ -15,13 +15,13 @@ export function ProductCard({ product, className }: { product: Product; classNam
   return (
     <div
       className={cn(
-        "group flex flex-col border border-border bg-cream transition-shadow hover:shadow-md",
+        "group flex flex-col border border-border bg-sand transition-shadow hover:shadow-md",
         className
       )}
     >
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden bg-white"
+        className="relative block aspect-square overflow-hidden bg-sand"
       >
         <Image
           src={image}

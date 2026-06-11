@@ -61,29 +61,51 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="container-page grid gap-6 py-6 md:grid-cols-[220px_1fr] md:gap-8 md:py-8">
-      <aside className="md:sticky md:top-24 md:h-fit">
-        <p className="eyebrow">Admin</p>
-        <nav className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-2 md:mx-0 md:flex-col md:gap-1 md:px-0 md:pb-0">
-          {NAV.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-cream px-4 py-2 text-sm hover:bg-sand md:rounded-lg md:border-0 md:bg-transparent md:gap-2.5 md:px-3 md:py-2.5"
-            >
-              <Icon size={16} /> {label}
-            </Link>
-          ))}
-          <Link
-            href="/"
-            className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-cream px-4 py-2 text-sm text-ink-soft hover:bg-sand md:rounded-lg md:border-0 md:bg-transparent md:gap-2.5 md:px-3 md:py-2.5"
-          >
-            <Home size={16} /> View site
-          </Link>
-        </nav>
-      </aside>
+    <div className="min-h-screen bg-sand">
+      {/* Mobile nav: vertical full-width, sticky */}
+      <nav className="sticky top-0 z-40 border-b border-border bg-cream md:hidden">
+        <div className="container-page flex items-center justify-between py-3">
+          <p className="eyebrow">Admin</p>
+          <div className="flex gap-1 overflow-x-auto">
+            {NAV.slice(0, 3).map(({ href, label, icon: Icon }) => (
+              <Link
+                key={href}
+                href={href}
+                className="flex shrink-0 items-center justify-center rounded-lg p-2 hover:bg-sand"
+                title={label}
+              >
+                <Icon size={20} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </nav>
 
-      <div className="min-w-0">{children}</div>
+      <div className="container-page grid gap-6 py-6 md:gap-8 md:py-8 md:grid-cols-[200px_1fr]">
+        {/* Desktop sidebar: vertical */}
+        <aside className="hidden md:block md:sticky md:top-24 md:h-fit">
+          <p className="eyebrow">Admin</p>
+          <nav className="mt-4 flex flex-col gap-1">
+            {NAV.map(({ href, label, icon: Icon }) => (
+              <Link
+                key={href}
+                href={href}
+                className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm hover:bg-sand transition-colors"
+              >
+                <Icon size={18} /> {label}
+              </Link>
+            ))}
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-sand transition-colors"
+            >
+              <Home size={18} /> View site
+            </Link>
+          </nav>
+        </aside>
+
+        <div className="min-w-0">{children}</div>
+      </div>
     </div>
   );
 }
