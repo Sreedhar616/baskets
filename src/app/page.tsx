@@ -83,37 +83,40 @@ export default async function HomePage() {
       <ReviewsSection />
 
       {/* ------------------------- Instagram CTA ------------------------ */}
-      <section className="container-page pb-12">
-        <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2">
-          <div className="relative aspect-[4/3] w-full md:order-2 md:aspect-auto md:min-h-[380px]">
+      <section className="container-page py-10 md:py-16">
+        <div className="grid gap-6 overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
+          {/* Image */}
+          <div className="relative aspect-square w-full overflow-hidden md:aspect-auto md:min-h-[400px] md:order-2">
             <Image
               src="/images/happy-customers.png"
               alt="Happy customer with a D's Designs handwoven basket"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
+              priority={false}
             />
           </div>
-          <div className="flex flex-col justify-center gap-4 p-6 md:order-1 md:p-10">
+          
+          {/* Content */}
+          <div className="flex flex-col justify-center gap-4 p-5 sm:p-6 md:order-1 md:gap-5 md:p-8 lg:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
               @designsofds on Instagram
             </p>
-            <h2 className="text-3xl tracking-tight text-balance md:text-4xl">
+            <h2 className="text-2xl font-medium tracking-tight text-balance sm:text-3xl md:text-3xl lg:text-4xl">
               Our happy customers
             </h2>
-            <p className="max-w-md text-sm leading-relaxed text-ink-soft">
-              See real customers with their handmade baskets and bags — or browse
-              our full range on our WhatsApp catalogue.
+            <p className="text-sm leading-relaxed text-ink-soft md:text-base">
+              See real customers with their handmade baskets and bags — or browse our full range on our WhatsApp catalogue.
             </p>
-            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/happy-customers" className={buttonClasses("primary", "lg")}>
+            <div className="mt-2 flex flex-col gap-3 md:mt-4 sm:flex-row sm:gap-2 md:flex-col lg:flex-row lg:gap-3">
+              <Link href="/happy-customers" className={buttonClasses("primary", "md")}>
                 View Happy Customers <ArrowRight size={18} />
               </Link>
               <a
                 href={SITE.whatsappCatalogUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonClasses("outline", "lg")}
+                className={buttonClasses("outline", "md")}
               >
                 <WhatsAppIcon size={18} /> WhatsApp Catalogue
               </a>
