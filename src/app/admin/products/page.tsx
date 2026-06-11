@@ -14,7 +14,7 @@ export default async function AdminProductsPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl">Products</h1>
+        <h1 className="text-2xl md:text-3xl">Products</h1>
         <Link href="/admin/products/new" className={buttonClasses("primary", "sm")}>
           <Plus size={16} /> New product
         </Link>

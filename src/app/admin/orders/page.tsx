@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getAllOrders } from "@/lib/admin-queries";
+import { deleteOrder } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/delete-button";
 import { formatINR } from "@/lib/utils";
 import type { Order } from "@/types/db";
 
@@ -25,15 +27,17 @@ function OrderList({ orders }: { orders: Order[] }) {
       {/* Mobile: cards */}
       <ul className="mt-4 space-y-3 md:hidden">
         {orders.map((o) => (
-          <li key={o.id}>
-            <Link
-              href={`/admin/orders/${o.id}`}
-              className="block rounded-xl border border-border bg-cream p-4"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-medium">{o.orderNumber}</span>
+          <li key={o.id} className="rounded-xl border border-border bg-cream p-4">
+            <div className="flex items-center justify-between gap-2">
+              <Link href={`/admin/orders/${o.id}`} className="font-medium hover:text-clay">
+                {o.orderNumber}
+              </Link>
+              <div className="flex items-center gap-1">
                 <span className={`rounded-full px-2.5 py-1 text-xs capitalize ${STATUS_COLORS[o.status] ?? ""}`}>{o.status}</span>
+                <DeleteButton id={o.id} action={deleteOrder} message="Delete this order permanently? This cannot be undone." />
               </div>
+            </div>
+            <Link href={`/admin/orders/${o.id}`} className="block">
               <p className="mt-1 text-sm">{o.customerName}</p>
               <p className="text-sm text-ink-soft">{o.customerPhone}</p>
               <p className="mt-1 text-sm text-ink-soft">{shortAddress(o)}</p>
@@ -57,6 +61,7 @@ function OrderList({ orders }: { orders: Order[] }) {
               <th className="px-4 py-3 font-medium">Payment</th>
               <th className="px-4 py-3 font-medium">Status</th>
               <th className="px-4 py-3 text-right font-medium">Total</th>
+              <th className="px-4 py-3 text-right font-medium"><span className="sr-only">Actions</span></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
@@ -76,6 +81,9 @@ function OrderList({ orders }: { orders: Order[] }) {
                   <span className={`rounded-full px-2.5 py-1 text-xs capitalize ${STATUS_COLORS[o.status] ?? ""}`}>{o.status}</span>
                 </td>
                 <td className="px-4 py-3 text-right font-semibold">{formatINR(o.total)}</td>
+                <td className="px-2 py-3 text-right">
+                  <DeleteButton id={o.id} action={deleteOrder} message="Delete this order permanently? This cannot be undone." />
+                </td>
               </tr>
             ))}
           </tbody>

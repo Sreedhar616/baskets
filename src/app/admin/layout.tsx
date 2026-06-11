@@ -61,24 +61,24 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="container-page grid gap-8 py-8 md:grid-cols-[220px_1fr]">
+    <div className="container-page grid gap-6 py-6 md:grid-cols-[220px_1fr] md:gap-8 md:py-8">
       <aside className="md:sticky md:top-24 md:h-fit">
         <p className="eyebrow">Admin</p>
-        <nav className="mt-3 flex gap-1 overflow-x-auto md:flex-col">
+        <nav className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-2 md:mx-0 md:flex-col md:gap-1 md:px-0 md:pb-0">
           {NAV.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className="flex shrink-0 items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm hover:bg-sand"
+              className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-cream px-4 py-2 text-sm hover:bg-sand md:rounded-lg md:border-0 md:bg-transparent md:gap-2.5 md:px-3 md:py-2.5"
             >
-              <Icon size={18} /> {label}
+              <Icon size={16} /> {label}
             </Link>
           ))}
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-sand"
+            className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-cream px-4 py-2 text-sm text-ink-soft hover:bg-sand md:rounded-lg md:border-0 md:bg-transparent md:gap-2.5 md:px-3 md:py-2.5"
           >
-            <Home size={18} /> View site
+            <Home size={16} /> View site
           </Link>
         </nav>
       </aside>

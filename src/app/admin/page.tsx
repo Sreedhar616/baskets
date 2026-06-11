@@ -30,9 +30,9 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="text-3xl">Dashboard</h1>
+      <h1 className="text-2xl md:text-3xl">Dashboard</h1>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="rounded-2xl border border-border bg-cream p-5">
             <p className="text-sm text-ink-soft">{s.label}</p>

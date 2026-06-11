@@ -84,43 +84,39 @@ export default async function HomePage() {
 
       {/* ------------------------- Instagram CTA ------------------------ */}
       <section className="container-page pb-12">
-        <div className="relative overflow-hidden rounded-lg">
-          <div className="relative h-[340px] w-full md:h-[420px]">
+        <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2">
+          <div className="relative aspect-[4/3] w-full md:order-2 md:aspect-auto md:min-h-[380px]">
             <Image
-              src="/products/5.jpg"
-              alt="Happy customers with D's Designs baskets"
+              src="/images/happy-customers.png"
+              alt="Happy customer with a D's Designs handwoven basket"
               fill
-              sizes="100vw"
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-ink/55" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-cream">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/90">
-                @designsofds on Instagram
-              </p>
-              <h2 className="mt-3 text-3xl uppercase tracking-tight text-cream md:text-4xl">
-                Our happy customers
-              </h2>
-              <p className="mx-auto mt-3 max-w-md text-sm text-cream/85">
-                See real customers with their handmade baskets and bags — or browse
-                our full range on our WhatsApp catalogue.
-              </p>
-              <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  href="/happy-customers"
-                  className={buttonClasses("primary", "lg", "bg-cream text-ink hover:bg-cream/90")}
-                >
-                  View Happy Customers <ArrowRight size={18} />
-                </Link>
-                <a
-                  href={SITE.whatsappCatalogUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonClasses("outline", "lg", "border-cream text-cream hover:bg-cream hover:text-ink")}
-                >
-                  <WhatsAppIcon size={18} /> WhatsApp Catalogue
-                </a>
-              </div>
+          </div>
+          <div className="flex flex-col justify-center gap-4 p-6 md:order-1 md:p-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
+              @designsofds on Instagram
+            </p>
+            <h2 className="text-3xl tracking-tight text-balance md:text-4xl">
+              Our happy customers
+            </h2>
+            <p className="max-w-md text-sm leading-relaxed text-ink-soft">
+              See real customers with their handmade baskets and bags — or browse
+              our full range on our WhatsApp catalogue.
+            </p>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href="/happy-customers" className={buttonClasses("primary", "lg")}>
+                View Happy Customers <ArrowRight size={18} />
+              </Link>
+              <a
+                href={SITE.whatsappCatalogUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonClasses("outline", "lg")}
+              >
+                <WhatsAppIcon size={18} /> WhatsApp Catalogue
+              </a>
             </div>
           </div>
         </div>
