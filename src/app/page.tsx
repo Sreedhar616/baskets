@@ -84,9 +84,9 @@ export default async function HomePage() {
 
       {/* ------------------------- Instagram CTA ------------------------ */}
       <section className="container-page py-10 md:py-16">
-        <div className="grid gap-6 overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
+        <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
           {/* Image */}
-          <div className="relative aspect-square w-full overflow-hidden md:aspect-auto md:min-h-[400px] md:order-2">
+          <div className="relative aspect-square w-full md:aspect-auto md:min-h-[500px] md:order-2">
             <Image
               src="/images/happy-customers.png"
               alt="Happy customer with a D's Designs handwoven basket"
@@ -98,7 +98,7 @@ export default async function HomePage() {
           </div>
           
           {/* Content */}
-          <div className="flex flex-col justify-center gap-4 p-5 sm:p-6 md:order-1 md:gap-5 md:p-8 lg:p-10">
+          <div className="flex flex-col justify-center gap-4 p-5 sm:p-6 md:order-1 md:gap-6 md:p-8 lg:p-12">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
               @designsofds on Instagram
             </p>
@@ -108,7 +108,7 @@ export default async function HomePage() {
             <p className="text-sm leading-relaxed text-ink-soft md:text-base">
               See real customers with their handmade baskets and bags — or browse our full range on our WhatsApp catalogue.
             </p>
-            <div className="mt-2 flex flex-col gap-3 md:mt-4 sm:flex-row sm:gap-2 md:flex-col lg:flex-row lg:gap-3">
+            <div className="mt-2 flex flex-col gap-3 md:mt-4 md:flex-col lg:flex-row lg:gap-3">
               <Link href="/happy-customers" className={buttonClasses("primary", "md")}>
                 View Happy Customers <ArrowRight size={18} />
               </Link>
