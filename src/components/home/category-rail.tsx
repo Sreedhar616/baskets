@@ -15,7 +15,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           href={`/category/${c.slug}`}
           className="group relative w-40 shrink-0 snap-start overflow-hidden rounded-md sm:w-48"
         >
-          <div className="relative aspect-[3/4] border border-border bg-white">
+          <div className="relative aspect-[3/4] border border-border bg-sand">
             <Image
               src={c.imageUrl ?? "/products/1.jpg"}
               alt={c.name}
