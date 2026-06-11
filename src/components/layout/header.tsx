@@ -5,7 +5,7 @@ import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { MobileNav } from "./mobile-nav";
 import { SearchBox } from "./search-box";
-import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/icons";
+import { InstagramIcon } from "@/components/ui/icons";
 
 export async function Header() {
   const [categories, settings] = await Promise.all([
@@ -23,12 +23,6 @@ export async function Header() {
           <div className="hidden items-center gap-4 md:flex">
             <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-cream/70">
               <InstagramIcon size={16} />
-            </a>
-            <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-cream/70">
-              <FacebookIcon size={16} />
-            </a>
-            <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-cream/70">
-              <YoutubeIcon size={16} />
             </a>
           </div>
           {settings.announcementText && (
