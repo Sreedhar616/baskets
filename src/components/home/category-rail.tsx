@@ -15,17 +15,16 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           href={`/category/${c.slug}`}
           className="group relative w-40 shrink-0 snap-start overflow-hidden rounded-md sm:w-48"
         >
-          <div className="relative aspect-[3/4] bg-sand">
+          <div className="relative aspect-[3/4] border border-border bg-white">
             <Image
               src={c.imageUrl ?? "/products/1.jpg"}
               alt={c.name}
               fill
               sizes="(min-width: 640px) 12rem, 10rem"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-3">
-              <h3 className="font-display text-base leading-tight text-cream sm:text-lg">
+            <div className="absolute inset-x-0 bottom-0 bg-cream/95 px-3 py-2 text-center">
+              <h3 className="text-sm font-medium leading-tight text-ink">
                 {c.name}
               </h3>
             </div>

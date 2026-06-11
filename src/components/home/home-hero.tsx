@@ -15,22 +15,22 @@ export function HomeHero() {
       <div className="pointer-events-none absolute -right-10 -top-24 h-[420px] w-[420px] rounded-full bg-[#f7eede]" />
       <div className="pointer-events-none absolute bottom-[-120px] left-[-60px] h-[300px] w-[300px] rounded-full bg-[#efe0c8]" />
 
-      <div className="container-page relative grid items-center gap-6 py-14 md:grid-cols-2 md:py-20">
+      <div className="container-page relative grid items-center gap-8 py-10 text-center md:grid-cols-2 md:gap-6 md:py-20 md:text-left">
         {/* Copy */}
-        <div className="relative z-10 max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay md:text-sm">
+        <div className="relative z-10 order-2 mx-auto max-w-xl md:order-1 md:mx-0">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-clay md:text-sm md:tracking-[0.25em]">
             Handwoven · Natural · Crafted
           </p>
-          <h1 className="mt-3 text-5xl leading-[1.02] text-ink md:text-6xl">
+          <h1 className="mt-3 text-4xl leading-[1.04] text-ink sm:text-5xl md:text-6xl">
             Baskets &amp; bags,
             <br />
             <span className="italic text-clay">woven by hand.</span>
           </h1>
-          <p className="mt-5 max-w-md text-base text-ink-soft">
+          <p className="mx-auto mt-4 max-w-md text-sm text-ink-soft md:mx-0 md:text-base">
             Beautifully crafted Chettinad, picnic, pooja and designer sets —
-            durable, vibrant and made to last. Free shipping over ₹999.
+            durable, vibrant and made to last.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <Link href="/products" className={buttonClasses("primary", "lg")}>
               Shop now <ArrowRight size={18} />
             </Link>
@@ -46,7 +46,7 @@ export function HomeHero() {
         </div>
 
         {/* Illustration */}
-        <div className="relative z-10 flex justify-center md:justify-end">
+        <div className="relative z-10 order-1 flex justify-center md:order-2 md:justify-end">
           <BasketArt />
         </div>
       </div>

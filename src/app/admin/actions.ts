@@ -133,6 +133,16 @@ export async function updateOrderStatus(id: string, status: string) {
   const { error } = await supabase.from("orders").update({ status }).eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/orders");
+  revalidatePath("/admin");
+}
+
+/** Permanently delete an order (and its items via cascade). Admin only. */
+export async function deleteOrder(id: string) {
+  const supabase = await adminClient();
+  const { error } = await supabase.from("orders").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/orders");
+  revalidatePath("/admin");
 }
 
 /* ------------------------------- Reviews ------------------------------- */

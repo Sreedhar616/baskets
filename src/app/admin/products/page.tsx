@@ -25,9 +25,9 @@ export default async function AdminProductsPage() {
       ) : (
         <ul className="mt-6 divide-y divide-border rounded-2xl border border-border">
           {products.map((p) => (
-            <li key={p.id} className="flex items-center gap-4 px-4 py-3">
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-sand">
-                {p.images[0] && <Image src={p.images[0]} alt="" fill sizes="56px" className="object-cover" />}
+            <li key={p.id} className="flex flex-wrap items-center gap-3 px-4 py-3 sm:flex-nowrap sm:gap-4">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-white">
+                {p.images[0] && <Image src={p.images[0]} alt="" fill sizes="56px" className="object-contain p-1" />}
               </div>
               <div className="min-w-0 flex-1">
                 <Link href={`/admin/products/${p.id}`} className="font-medium hover:text-clay">
@@ -38,7 +38,7 @@ export default async function AdminProductsPage() {
                   {p.stock > 0 ? "In stock" : "Out of stock"}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:flex-nowrap">
                 {p.stock <= 0 && (
                   <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
                     Sold out

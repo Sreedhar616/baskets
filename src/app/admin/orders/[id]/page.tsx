@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getOrderById } from "@/lib/admin-queries";
 import { OrderStatusSelect } from "@/components/admin/order-status-select";
+import { OrderActions } from "@/components/admin/order-actions";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { buttonClasses } from "@/components/ui/button";
 import { formatINR, whatsappLink } from "@/lib/utils";
@@ -25,14 +27,19 @@ export default async function AdminOrderDetail({
     <div>
       <Link href="/admin/orders" className="text-sm text-clay hover:underline">← Orders</Link>
 
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+      <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl">{order.orderNumber}</h1>
-          <p className="text-ink-soft">
+          <h1 className="text-2xl md:text-3xl">{order.orderNumber}</h1>
+          <p className="text-sm text-ink-soft">
             {new Date(order.createdAt).toLocaleString("en-IN")}
           </p>
         </div>
         <OrderStatusSelect orderId={order.id} current={order.status} />
+      </div>
+
+      {/* Quick actions */}
+      <div className="mt-4">
+        <OrderActions orderId={order.id} status={order.status} />
       </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -47,23 +54,41 @@ export default async function AdminOrderDetail({
           </a>
         </section>
 
-        {/* Shipping */}
+        {/* Shipping / location */}
         <section className="rounded-2xl border border-border bg-cream p-5">
-          <h2 className="font-display text-lg">Shipping address</h2>
+          <h2 className="font-display text-lg">Delivery location</h2>
           <p className="mt-2">{addr.line1}</p>
           {addr.line2 && <p>{addr.line2}</p>}
           <p>{addr.city}, {addr.state} - {addr.pincode}</p>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              `${addr.line1}, ${addr.line2 ? addr.line2 + ", " : ""}${addr.city}, ${addr.state} ${addr.pincode}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClasses("outline", "sm", "mt-4")}
+          >
+            View on map
+          </a>
         </section>
       </div>
 
       {/* Items */}
       <section className="mt-6 rounded-2xl border border-border bg-cream p-5">
-        <h2 className="font-display text-lg">Items</h2>
+        <h2 className="font-display text-lg">Items ordered</h2>
         <ul className="mt-3 divide-y divide-border">
           {order.items.map((i) => (
-            <li key={i.id} className="flex justify-between py-2.5 text-sm">
-              <span>{i.productName} × {i.quantity}</span>
-              <span>{formatINR(i.lineTotal)}</span>
+            <li key={i.id} className="flex items-center gap-3 py-3 text-sm">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-border bg-white">
+                {i.productImage && (
+                  <Image src={i.productImage} alt="" fill sizes="56px" className="object-contain p-1" />
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="font-medium">{i.productName}</p>
+                <p className="text-ink-soft">Qty {i.quantity} · {formatINR(i.unitPrice)} each</p>
+              </div>
+              <span className="font-semibold">{formatINR(i.lineTotal)}</span>
             </li>
           ))}
         </ul>
