@@ -27,21 +27,21 @@ export async function Header() {
       )}
 
       {/* Main header with logo and navigation */}
-      <div className="container-page py-3 md:py-4">
+      <div className="container-page py-2 md:py-3">
         {/* Top row: Logo (left), Search + Icons (right), all in one line */}
-        <div className="flex items-center justify-between gap-3 md:gap-6">
+        <div className="flex items-center justify-between gap-2 md:gap-4">
           {/* Left: Logo */}
           <Link
             href="/"
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-16 md:w-16">
+            <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-14 md:w-14">
               <Image
                 src="/11.jpeg"
                 alt={`${SITE.name} logo`}
-                width={80}
-                height={80}
+                width={72}
+                height={72}
                 priority
                 className="h-[88%] w-[88%] object-contain"
               />
@@ -86,8 +86,8 @@ export async function Header() {
         </div>
 
         {/* Navigation row - horizontal on every device, never hidden in a menu */}
-        <nav className="border-t border-linen pt-3 mt-3 md:border-0 md:mt-3 md:pt-0">
-          <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-2">
+        <nav className="border-t border-linen pt-2 mt-2 md:border-0 md:mt-2 md:pt-0">
+          <ul className="flex flex-nowrap items-center justify-center gap-0.5 overflow-x-auto no-scrollbar sm:gap-1">
             {[
               { label: "Home", href: "/" },
               { label: "Shop", href: "/products" },
@@ -97,7 +97,7 @@ export async function Header() {
               <li key={item.label} className="shrink-0">
                 <Link
                   href={item.href}
-                  className="block whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-clay hover:text-cream md:text-sm"
+                  className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-clay hover:text-cream md:px-4 md:py-2 md:text-sm"
                 >
                   {item.label}
                 </Link>

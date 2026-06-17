@@ -82,7 +82,91 @@ export default async function HomePage() {
       {/* ----------------------------- Reviews -------------------------- */}
       <ReviewsSection />
 
-      {/* ------------------------- Instagram CTA ------------------------ */}
+      {/* ----------------------- About Us Section ---------------------- */}
+      <section id="about" className="bg-secondary/30 border-y border-border">
+        <div className="container-page py-12 md:py-16">
+          <div className="max-w-3xl mx-auto">
+            <p className="eyebrow">Our Story</p>
+            <h2 className="mt-2 text-3xl md:text-4xl mb-6">About D's Designs</h2>
+            <div className="space-y-4 text-ink-soft leading-relaxed">
+              <p>
+                D's Designs is a heritage handweaving studio dedicated to preserving the art of traditional basket-making. For generations, our artisans have mastered the craft of transforming natural fibers into beautiful, functional pieces that celebrate the richness of Indian craftsmanship.
+              </p>
+              <p>
+                Every basket is handwoven with care and attention to detail, using sustainable materials sourced responsibly. We believe in creating products that are not only beautiful but also tell a story of dedication, skill, and cultural pride.
+              </p>
+              <p>
+                Our mission is to bring authentic, handcrafted baskets and bags to customers who value quality, sustainability, and the art of traditional making. When you choose D's Designs, you're supporting artisans and preserving a centuries-old tradition.
+              </p>
+            </div>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { label: "Baskets Woven", value: "5000+" },
+                { label: "Happy Customers", value: "1200+" },
+                { label: "Years of Heritage", value: "50+" },
+                { label: "Artisans Supported", value: "40+" },
+              ].map(({ label, value }) => (
+                <div key={label} className="text-center">
+                  <p className="text-2xl md:text-3xl font-serif text-clay mb-1">{value}</p>
+                  <p className="text-xs uppercase tracking-wide text-ink-soft">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------- Contact Us Section ---------------------- */}
+      <section id="contact" className="container-page py-12 md:py-16">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="eyebrow">Get in Touch</p>
+          <h2 className="mt-2 text-3xl md:text-4xl mb-8">Contact D's Designs</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                icon: "📞",
+                label: "Phone",
+                value: "+91 98765 43210",
+                href: "tel:+919876543210"
+              },
+              {
+                icon: "✉️",
+                label: "Email",
+                value: "hello@dsdesigns.com",
+                href: "mailto:hello@dsdesigns.com"
+              },
+              {
+                icon: "💬",
+                label: "WhatsApp",
+                value: "Chat with us",
+                href: "https://wa.me/919876543210"
+              },
+            ].map(({ icon, label, value, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") && !href.startsWith("mailto:") && !href.startsWith("tel:") ? "_blank" : undefined}
+                rel={href.startsWith("http") && !href.startsWith("mailto:") && !href.startsWith("tel:") ? "noopener noreferrer" : undefined}
+                className="p-6 rounded-2xl border border-border hover:border-clay hover:bg-sand transition-colors"
+              >
+                <div className="text-3xl mb-3">{icon}</div>
+                <p className="font-semibold text-ink mb-1">{label}</p>
+                <p className="text-sm text-ink-soft hover:text-clay">{value}</p>
+              </a>
+            ))}
+          </div>
+
+          <div className="rounded-2xl border border-border bg-cream p-8">
+            <p className="text-ink-soft mb-4">
+              Have questions? We'd love to hear from you. Reach out via phone, email, or WhatsApp and we'll get back to you as soon as possible.
+            </p>
+            <p className="text-xs text-ink-soft font-medium">
+              Hours: Mon–Sat, 10am–7pm IST
+            </p>
+          </div>
+        </div>
+      </section>
       <section className="container-page py-10 md:py-16">
         <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
           {/* Image */}
