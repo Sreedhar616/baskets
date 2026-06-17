@@ -36,16 +36,20 @@ export async function Header() {
           </div>
 
           {/* Center: Logo */}
-          <Link href="/" className="flex shrink-0 flex-col items-center">
-            {/* Logo image if available, otherwise text */}
-            <div className="h-14 w-14 relative">
+          <Link href="/" className="flex shrink-0 flex-col items-center gap-1">
+            <div className="relative h-16 w-16 md:h-20 md:w-20">
               <Image
                 src="/11.jpeg"
                 alt="D's Designs Logo"
                 fill
-                className="object-contain"
+                priority
+                sizes="80px"
+                className="rounded-full object-cover"
               />
             </div>
+            <span className="font-serif text-base md:text-lg tracking-wide text-ink leading-none">
+              {SITE.name}
+            </span>
           </Link>
 
           {/* Right: Account + Cart + Instagram */}
