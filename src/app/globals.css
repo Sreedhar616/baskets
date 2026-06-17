@@ -42,7 +42,7 @@
     scroll-behavior: smooth;
   }
   body {
-    background: var(--color-sand);
+    background: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -83,3 +83,35 @@
 /* Hide scrollbar for horizontal scrollers (mobile category rail) */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Subtle entrance + ambient animations for the hero */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-fade-rise {
+  opacity: 0;
+  animation: fade-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-slow-zoom {
+  animation: slow-zoom 14s ease-in-out infinite alternate;
+}
+.animate-soft-float {
+  animation: soft-float 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-rise,
+  .animate-slow-zoom,
+  .animate-soft-float {
+    animation: none;
+    opacity: 1;
+  }
+}
