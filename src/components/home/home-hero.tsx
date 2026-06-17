@@ -13,8 +13,8 @@ import { WhatsAppIcon } from "@/components/ui/icons";
 export function HomeHero() {
   return (
     <section className="bg-cream border-b-2 border-linen overflow-hidden">
-      <div className="container-page py-10 md:py-16">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+      <div className="container-page py-8 md:py-16">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
           {/* Left: copy */}
           <div className="order-2 text-center md:order-1 md:text-left">
             <p className="animate-fade-rise text-xs font-semibold uppercase tracking-[0.3em] text-clay mb-3">
@@ -63,7 +63,7 @@ export function HomeHero() {
           {/* Right: tall editorial image with ambient zoom */}
           <div className="order-1 md:order-2">
             <div
-              className="animate-fade-rise relative mx-auto w-full max-w-md"
+              className="animate-fade-rise relative mx-auto w-full max-w-sm md:max-w-md"
               style={{ animationDelay: "0.12s" }}
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
@@ -72,7 +72,7 @@ export function HomeHero() {
                   alt="Women artisans weaving handmade baskets by hand"
                   fill
                   priority
-                  sizes="(min-width: 768px) 420px, 90vw"
+                  sizes="(min-width: 768px) 420px, 80vw"
                   className="animate-slow-zoom object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
