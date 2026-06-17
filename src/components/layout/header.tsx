@@ -36,20 +36,21 @@ export async function Header() {
           </div>
 
           {/* Center: Logo */}
-          <Link href="/" className="flex shrink-0 flex-col items-center gap-1">
-            <div className="relative h-16 w-16 md:h-20 md:w-20">
+          <Link
+            href="/"
+            aria-label={`${SITE.name} home`}
+            className="flex shrink-0 items-center justify-center"
+          >
+            <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-20 md:w-20">
               <Image
                 src="/11.jpeg"
-                alt="D's Designs Logo"
-                fill
+                alt={`${SITE.name} logo`}
+                width={88}
+                height={88}
                 priority
-                sizes="80px"
-                className="rounded-full object-cover"
+                className="h-[88%] w-[88%] object-contain"
               />
             </div>
-            <span className="font-serif text-base md:text-lg tracking-wide text-ink leading-none">
-              {SITE.name}
-            </span>
           </Link>
 
           {/* Right: Account + Cart + Instagram */}
