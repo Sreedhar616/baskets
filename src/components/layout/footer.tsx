@@ -24,15 +24,17 @@ export async function Footer() {
 
       {/* Main footer content */}
       <div className="container-page py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-4 mb-8">
+        <div className="grid gap-8 md:grid-cols-4 md:gap-12 mb-12">
           {/* Brand section */}
-          <div>
-            <h3 className="font-serif text-xl text-ink mb-3">{SITE.name}</h3>
-            <p className="text-sm text-ink-soft mb-4">{SITE.tagline}</p>
-            <p className="text-xs text-ink-soft leading-relaxed">
+          <div className="flex flex-col">
+            <h3 className="font-serif text-xl text-ink mb-2">{SITE.name}</h3>
+            <p className="text-xs text-ink-soft mb-4 leading-relaxed">
+              {SITE.tagline}
+            </p>
+            <p className="text-xs text-ink-soft leading-relaxed mb-6">
               Traditional handwoven baskets and bags crafted by skilled artisans in India. Each piece tells a story of heritage and craftsmanship.
             </p>
-            <div className="mt-5 flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <a
                 href={instagram}
                 target="_blank"
@@ -62,9 +64,9 @@ export async function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-ink mb-4 uppercase text-xs tracking-wider">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-ink-soft">
+          <div className="flex flex-col">
+            <h4 className="font-semibold text-ink mb-6 uppercase text-xs tracking-wider">Quick Links</h4>
+            <ul className="space-y-3 text-sm text-ink-soft flex flex-col">
               <li><Link href="/" className="hover:text-clay transition-colors">Home</Link></li>
               <li><Link href="/products" className="hover:text-clay transition-colors">Shop</Link></li>
               <li><Link href="/happy-customers" className="hover:text-clay transition-colors">About Us</Link></li>
@@ -73,9 +75,9 @@ export async function Footer() {
           </div>
 
           {/* Collections */}
-          <div>
-            <h4 className="font-semibold text-ink mb-4 uppercase text-xs tracking-wider">Collections</h4>
-            <ul className="space-y-2 text-sm text-ink-soft">
+          <div className="flex flex-col">
+            <h4 className="font-semibold text-ink mb-6 uppercase text-xs tracking-wider">Collections</h4>
+            <ul className="space-y-3 text-sm text-ink-soft flex flex-col">
               {categories.slice(0, 5).map((c) => (
                 <li key={c.id}>
                   <Link href={`/category/${c.slug}`} className="hover:text-clay transition-colors">
@@ -87,9 +89,9 @@ export async function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
-            <h4 className="font-semibold text-ink mb-4 uppercase text-xs tracking-wider">Contact</h4>
-            <ul className="space-y-2 text-sm text-ink-soft">
+          <div className="flex flex-col">
+            <h4 className="font-semibold text-ink mb-6 uppercase text-xs tracking-wider">Contact</h4>
+            <ul className="space-y-3 text-sm text-ink-soft flex flex-col">
               <li>
                 <a href={`tel:${phone}`} className="hover:text-clay transition-colors font-medium">
                   {phone}
@@ -112,9 +114,9 @@ export async function Footer() {
         </div>
 
         {/* Bottom copyright */}
-        <div className="border-t border-linen pt-6 text-center text-xs text-ink-soft">
+        <div className="border-t border-linen pt-8 text-center text-xs text-ink-soft">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p className="mt-2 text-xs">Handmade in India · Free shipping on orders over ₹999</p>
+          <p className="mt-2">Handmade in India · Free shipping on orders over ₹999</p>
         </div>
       </div>
     </footer>
