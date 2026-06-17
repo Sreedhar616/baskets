@@ -27,56 +27,66 @@ export async function Header() {
       )}
 
       {/* Main header with logo and navigation */}
-      <div className="container-page py-4">
-        {/* Top row: Logo centered, account + cart on right */}
-        <div className="flex items-center justify-between gap-4 mb-4">
-          {/* Left: Mobile search (hidden on desktop) */}
-          <div className="flex-1 md:hidden">
-            <SearchBox />
-          </div>
-
-          {/* Center: Logo */}
+      <div className="container-page py-3 md:py-4">
+        {/* Top row: Logo (left), Search + Icons (right), all in one line */}
+        <div className="flex items-center justify-between gap-3 md:gap-6">
+          {/* Left: Logo */}
           <Link
             href="/"
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-20 md:w-20">
+            <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-16 md:w-16">
               <Image
                 src="/11.jpeg"
                 alt={`${SITE.name} logo`}
-                width={88}
-                height={88}
+                width={80}
+                height={80}
                 priority
                 className="h-[88%] w-[88%] object-contain"
               />
             </div>
           </Link>
 
-          {/* Right: Account + Cart + Instagram */}
-          <div className="flex flex-1 items-center justify-end gap-3">
+          {/* Center: Search (on desktop only, takes available space) */}
+          <div className="hidden md:flex flex-1 max-w-xs">
+            <SearchBox />
+          </div>
+
+          {/* Right: Icons + Mobile Search */}
+          <div className="flex items-center justify-end gap-2 md:gap-4">
+            {/* Mobile search icon */}
+            <div className="md:hidden">
+              <SearchBox />
+            </div>
+            
+            {/* Instagram */}
             <a
               href={instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="hover:text-clay transition-colors"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand transition-colors"
             >
               <InstagramIcon size={18} />
             </a>
+            
+            {/* Account */}
             <Link
               href="/account"
               aria-label="Account"
-              className="inline-flex h-9 w-9 items-center justify-center hover:bg-sand rounded transition-colors"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand transition-colors"
             >
               <User size={18} />
             </Link>
+            
+            {/* Cart */}
             <CartButton />
           </div>
         </div>
 
         {/* Navigation row - horizontal on every device, never hidden in a menu */}
-        <nav className="border-t border-linen pt-3 md:border-0 md:pt-0">
+        <nav className="border-t border-linen pt-3 mt-3 md:border-0 md:mt-3 md:pt-0">
           <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-2">
             {[
               { label: "Home", href: "/" },
@@ -95,11 +105,6 @@ export async function Header() {
             ))}
           </ul>
         </nav>
-
-        {/* Desktop search - shown on larger screens */}
-        <div className="hidden md:block mt-4 max-w-xs mx-auto">
-          <SearchBox />
-        </div>
       </div>
     </header>
   );

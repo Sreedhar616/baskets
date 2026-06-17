@@ -25,9 +25,9 @@ export function SearchBox() {
       <button
         aria-label="Search products"
         onClick={() => setOpen(true)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-sand"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand transition-colors"
       >
-        <Search size={20} />
+        <Search size={18} />
       </button>
     );
   }
@@ -38,16 +38,16 @@ export function SearchBox() {
         autoFocus
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Search products…"
-        className="h-10 w-40 rounded-full border border-border bg-cream px-4 text-sm outline-none focus:border-clay md:w-56"
+        placeholder="Search…"
+        className="h-9 px-4 rounded-full border border-linen bg-cream text-sm outline-none focus:border-clay focus:ring-1 focus:ring-clay transition-all w-32 md:w-48"
       />
       <button
         type="button"
         aria-label="Close search"
         onClick={() => { setOpen(false); setQ(""); }}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-sand"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-sand transition-colors"
       >
-        <X size={18} />
+        <X size={16} />
       </button>
     </form>
   );
