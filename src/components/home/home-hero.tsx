@@ -19,10 +19,10 @@ export function HomeHero() {
             Handcrafted Excellence
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-3">
-            Artisans at Work
+            Handwoven with Heart
           </h1>
           <p className="text-sm md:text-base text-ink-soft max-w-2xl mx-auto">
-            Our baskets are woven by skilled artisans using traditional techniques passed down through generations.
+            Each basket is woven by skilled artisans using traditional techniques passed down through generations.
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export function HomeHero() {
           <div className="relative aspect-square w-full max-w-lg overflow-hidden border-4 border-ink-soft bg-sand">
             <Image
               src="/images/artisans-weaving.png"
-              alt="Indian artisans weaving handmade baskets"
+              alt="A collection of handwoven baskets and bags by D's Designs"
               fill
               priority
               sizes="(min-width: 768px) 500px, 100vw"
