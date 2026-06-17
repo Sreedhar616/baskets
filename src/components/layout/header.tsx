@@ -74,32 +74,25 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Navigation row */}
-        <nav className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 border-t border-linen pt-3 md:border-0 md:pt-0">
-          <Link
-            href="/"
-            className="text-sm font-medium text-ink hover:text-clay transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="/products"
-            className="text-sm font-medium text-ink hover:text-clay transition-colors"
-          >
-            Shop
-          </Link>
-          <a
-            href="#about"
-            className="text-sm font-medium text-ink hover:text-clay transition-colors"
-          >
-            About Us
-          </a>
-          <a
-            href="#contact"
-            className="text-sm font-medium text-ink hover:text-clay transition-colors"
-          >
-            Contact
-          </a>
+        {/* Navigation row - horizontal on every device, never hidden in a menu */}
+        <nav className="border-t border-linen pt-3 md:border-0 md:pt-0">
+          <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-2">
+            {[
+              { label: "Home", href: "/" },
+              { label: "Shop", href: "/products" },
+              { label: "About Us", href: "#about" },
+              { label: "Contact", href: "#contact" },
+            ].map((item) => (
+              <li key={item.label} className="shrink-0">
+                <Link
+                  href={item.href}
+                  className="block whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-clay hover:text-cream md:text-sm"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
 
         {/* Desktop search - shown on larger screens */}

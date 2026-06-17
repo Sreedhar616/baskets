@@ -26,12 +26,12 @@ export function HomeHero() {
           </p>
         </div>
 
-        {/* Square hero image - artisans weaving */}
+        {/* Square hero image - women weaving baskets */}
         <div className="flex justify-center mb-8">
-          <div className="relative aspect-square w-full max-w-lg overflow-hidden border-4 border-ink-soft bg-sand">
+          <div className="relative aspect-square w-full max-w-lg overflow-hidden rounded-xl2 border border-linen shadow-sm bg-sand">
             <Image
               src="/images/artisans-weaving.png"
-              alt="A collection of handwoven baskets and bags by D's Designs"
+              alt="Women artisans weaving handmade baskets by hand"
               fill
               priority
               sizes="(min-width: 768px) 500px, 100vw"

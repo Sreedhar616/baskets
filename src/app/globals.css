@@ -42,7 +42,7 @@
     scroll-behavior: smooth;
   }
   body {
-    background: var(--color-sand);
+    background: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
