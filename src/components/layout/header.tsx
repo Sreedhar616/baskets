@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { User, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { User } from "lucide-react";
 import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
-import { MobileNav } from "./mobile-nav";
 import { SearchBox } from "./search-box";
 import { InstagramIcon } from "@/components/ui/icons";
 
@@ -16,83 +16,92 @@ export async function Header() {
   const instagram = settings.instagramUrl ?? SITE.instagramUrl;
 
   return (
-    <header className="sticky top-0 z-40">
-      {/* Top black bar: social icons + announcement */}
-      <div className="bg-ink text-cream">
-        <div className="container-page flex h-10 items-center justify-between gap-4">
-          <div className="hidden items-center gap-4 md:flex">
-            <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-cream/70">
-              <InstagramIcon size={16} />
-            </a>
-          </div>
-          {settings.announcementText && (
-            <p className="flex-1 text-center text-xs font-medium tracking-wide md:flex-none">
-              {settings.announcementText}
-            </p>
-          )}
-          <div className="hidden w-[88px] md:block" />
+    <header className="sticky top-0 z-40 bg-cream border-b-2 border-linen">
+      {/* Announcement bar */}
+      {settings.announcementText && (
+        <div className="bg-clay text-cream text-center py-2">
+          <p className="text-xs font-medium tracking-wide">
+            {settings.announcementText}
+          </p>
         </div>
-      </div>
+      )}
 
-      {/* Main bar: centered logo, search + account + cart */}
-      <div className="border-b border-border bg-cream">
-        <div className="container-page flex h-20 items-center">
-          {/* Left: mobile menu / desktop search */}
-          <div className="flex flex-1 items-center">
-            <MobileNav categories={categories} />
-            <div className="hidden md:block">
-              <SearchBox />
-            </div>
+      {/* Main header with logo and navigation */}
+      <div className="container-page py-4">
+        {/* Top row: Logo centered, account + cart on right */}
+        <div className="flex items-center justify-between gap-4 mb-4">
+          {/* Left: Mobile search (hidden on desktop) */}
+          <div className="flex-1 md:hidden">
+            <SearchBox />
           </div>
 
-          {/* Center: brand wordmark */}
+          {/* Center: Logo */}
           <Link href="/" className="flex shrink-0 flex-col items-center">
-            <span className="text-2xl font-semibold uppercase leading-none tracking-[0.15em] md:text-3xl">
-              {SITE.name}
-            </span>
-            <span className="mt-0.5 text-[10px] uppercase tracking-[0.4em] text-ink-soft">
-              {SITE.tagline.split(" ")[0]}
-            </span>
+            {/* Logo image if available, otherwise text */}
+            <div className="h-14 w-14 relative">
+              <Image
+                src="/11.jpeg"
+                alt="D's Designs Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
 
-          {/* Right: account + cart */}
-          <div className="flex flex-1 items-center justify-end gap-1">
+          {/* Right: Account + Cart + Instagram */}
+          <div className="flex flex-1 items-center justify-end gap-3">
+            <a
+              href={instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:text-clay transition-colors"
+            >
+              <InstagramIcon size={18} />
+            </a>
             <Link
               href="/account"
               aria-label="Account"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-sand"
+              className="inline-flex h-9 w-9 items-center justify-center hover:bg-sand rounded transition-colors"
             >
-              <User size={20} />
+              <User size={18} />
             </Link>
             <CartButton />
           </div>
         </div>
 
-        {/* Centered nav row (desktop) */}
-        <nav className="hidden items-center justify-center gap-7 pb-3 md:flex">
-          <Link href="/" className="text-sm hover:underline">Home</Link>
-          <Link href="/products" className="text-sm hover:underline">All Products</Link>
-          <div className="group relative">
-            <button className="flex items-center gap-1 text-sm hover:underline">
-              Collections <ChevronDown size={14} />
-            </button>
-            <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              <div className="grid w-[34rem] grid-cols-2 gap-1 rounded-md border border-border bg-cream p-3 shadow-lg">
-                {categories.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/category/${c.slug}`}
-                    className="rounded-md px-3 py-2 text-sm text-ink-soft hover:bg-sand hover:text-ink"
-                  >
-                    {c.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-          <Link href="/happy-customers" className="text-sm hover:underline">Happy Customers</Link>
-          <Link href="/#reviews" className="text-sm hover:underline">Reviews</Link>
+        {/* Navigation row */}
+        <nav className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 border-t border-linen pt-3 md:border-0 md:pt-0">
+          <Link
+            href="/"
+            className="text-sm font-medium text-ink hover:text-clay transition-colors"
+          >
+            Home
+          </Link>
+          <Link
+            href="/products"
+            className="text-sm font-medium text-ink hover:text-clay transition-colors"
+          >
+            Shop
+          </Link>
+          <a
+            href="#about"
+            className="text-sm font-medium text-ink hover:text-clay transition-colors"
+          >
+            About Us
+          </a>
+          <a
+            href="#contact"
+            className="text-sm font-medium text-ink hover:text-clay transition-colors"
+          >
+            Contact
+          </a>
         </nav>
+
+        {/* Desktop search - shown on larger screens */}
+        <div className="hidden md:block mt-4 max-w-xs mx-auto">
+          <SearchBox />
+        </div>
       </div>
     </header>
   );

@@ -1,26 +1,25 @@
 @import "tailwindcss";
 
 /*
-  D's Designs — premium handmade baskets & bags.
-  Warm artisan palette: soft cream canvas, deep brown-black ink and a
-  terracotta clay accent that echoes the handwoven baskets themselves.
+  D's Designs — Premium Handwoven Baskets & Bags.
+  Classic, elegant traditional aesthetic celebrating handcrafted artistry.
+  Warm beige canvas with earthy accents and refined typography.
 */
 @theme {
-  /* Brand palette */
-  --color-cream: #fdfaf4;
-  --color-sand: #f6efe3;
-  --color-linen: #ede3d2;
-  --color-ink: #2b2118;
-  --color-ink-soft: #7a6a58;
-  /* Primary accent — terracotta clay (kept under the `clay` name so the
-     hundreds of existing `clay` utility classes recolour in one place). */
+  /* Traditional warm palette - light beige focus */
+  --color-cream: #f5f1e8;
+  --color-sand: #ede7dd;
+  --color-linen: #dcd3c5;
+  --color-ink: #3d3530;
+  --color-ink-soft: #7a7268;
+  /* Primary accent — warm terracotta clay */
   --color-clay: #a8552e;
   --color-clay-dark: #8a4423;
   --color-sage: #6d8260;
   --color-sage-dark: #44573c;
   --color-gold: #b08d3a;
   --color-sale: #c93a2b;
-  --color-border: #e8ddc9;
+  --color-border: #d9cfc0;
 
   /* Semantic aliases used across the app */
   --color-background: var(--color-cream);
@@ -29,12 +28,12 @@
   --color-primary-foreground: #ffffff;
   --color-muted: var(--color-ink-soft);
 
-  /* Typography — clean sans-serif throughout (Sephora-style) */
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Typography — classic serif for headings, clean sans for body */
+  --font-display: Georgia, 'Garamond', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  /* Radii */
-  --radius-xl2: 1.25rem;
+  /* Radii — minimal rounding for traditional feel */
+  --radius-xl2: 0.5rem;
 }
 
 @layer base {

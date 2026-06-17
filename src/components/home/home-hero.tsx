@@ -6,58 +6,58 @@ import { SITE } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/ui/icons";
 
 /**
- * Photographic hero: warm lifestyle shot of handwoven baskets with brand
- * copy on a soft linen backdrop.
+ * Traditional hero: square image of artisans weaving baskets with
+ * classic positioning and typography reflecting handcrafted heritage.
  */
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-linen">
-      {/* Decorative soft circles */}
-      <div className="pointer-events-none absolute -right-10 -top-24 h-[420px] w-[420px] rounded-full bg-sand" />
-      <div className="pointer-events-none absolute bottom-[-120px] left-[-60px] h-[300px] w-[300px] rounded-full bg-cream/60" />
-
-      <div className="container-page relative grid items-center gap-8 py-10 text-center md:grid-cols-2 md:gap-10 md:py-20 md:text-left">
-        {/* Copy */}
-        <div className="relative z-10 order-2 mx-auto max-w-xl md:order-1 md:mx-0">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-clay md:text-sm md:tracking-[0.25em]">
-            Handwoven · Natural · Crafted
+    <section className="bg-cream border-b-2 border-linen">
+      <div className="container-page py-8 md:py-12">
+        {/* Traditional header */}
+        <div className="text-center mb-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-clay mb-2">
+            Handcrafted Excellence
           </p>
-          <h1 className="mt-3 text-balance text-4xl leading-[1.04] text-ink sm:text-5xl md:text-6xl">
-            Baskets &amp; bags,
-            <br />
-            <span className="italic text-clay">woven by hand.</span>
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-3">
+            Artisans at Work
           </h1>
-          <p className="mx-auto mt-4 max-w-md text-pretty text-sm text-ink-soft md:mx-0 md:text-base">
-            Beautifully crafted Chettinad, picnic, pooja and designer sets —
-            durable, vibrant and made to last.
+          <p className="text-sm md:text-base text-ink-soft max-w-2xl mx-auto">
+            Our baskets are woven by skilled artisans using traditional techniques passed down through generations.
           </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-            <Link href="/products" className={buttonClasses("primary", "lg")}>
-              Shop now <ArrowRight size={18} />
-            </Link>
-            <a
-              href={SITE.whatsappCatalogUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonClasses("outline", "lg")}
-            >
-              <WhatsAppIcon size={18} /> Catalogue
-            </a>
-          </div>
         </div>
 
-        {/* Hero photo */}
-        <div className="relative z-10 order-1 flex justify-center md:order-2 md:justify-end">
-          <div className="relative aspect-square w-64 overflow-hidden rounded-full border-8 border-cream shadow-xl sm:w-72 md:w-96 md:rounded-[2rem]">
+        {/* Square hero image - artisans weaving */}
+        <div className="flex justify-center mb-8">
+          <div className="relative aspect-square w-full max-w-lg overflow-hidden border-4 border-ink-soft bg-sand">
             <Image
-              src="/images/hero-baskets.png"
-              alt="Handwoven wicker baskets in warm natural light"
+              src="/images/artisans-weaving.png"
+              alt="Indian artisans weaving handmade baskets"
               fill
               priority
-              sizes="(min-width: 768px) 384px, 288px"
+              sizes="(min-width: 768px) 500px, 100vw"
               className="object-cover"
             />
           </div>
+        </div>
+
+        {/* CTA buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <Link href="/products" className={buttonClasses("primary", "lg")}>
+            Shop now <ArrowRight size={18} />
+          </Link>
+          <a
+            href={SITE.whatsappCatalogUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClasses("outline", "lg")}
+          >
+            <WhatsAppIcon size={18} /> View Catalogue
+          </a>
+        </div>
+
+        {/* Heritage text */}
+        <div className="text-center text-xs md:text-sm text-ink-soft">
+          <p className="font-medium">Made in India · Handcrafted Products</p>
         </div>
       </div>
     </section>
