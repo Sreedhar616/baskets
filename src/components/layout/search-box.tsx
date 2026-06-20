@@ -34,13 +34,16 @@ export function SearchBox() {
 
   return (
     <form onSubmit={submit} className="flex items-center gap-1">
-      <input
-        autoFocus
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder="Search products…"
-        className="h-10 w-40 rounded-full border border-border bg-cream px-4 text-sm outline-none focus:border-clay md:w-56"
-      />
+      <div className="relative flex items-center">
+        <Search size={18} className="absolute left-3 text-ink-soft pointer-events-none" />
+        <input
+          autoFocus
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search products…"
+          className="h-10 w-40 rounded-full border border-border bg-cream pl-10 pr-4 text-sm outline-none focus:border-clay md:w-56"
+        />
+      </div>
       <button
         type="button"
         aria-label="Close search"
