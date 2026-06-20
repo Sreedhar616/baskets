@@ -41,7 +41,7 @@ export async function Header() {
           >
             <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden md:h-24 md:w-24">
               <Image
-                src="/logo-ds-designs.png"
+                src="/logo-d-clean.png"
                 alt={`${SITE.name} logo`}
                 width={96}
                 height={96}
