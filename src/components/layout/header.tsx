@@ -52,13 +52,13 @@ export async function Header() {
           </Link>
 
           {/* Right: Account + Cart + Instagram */}
-          <div className="flex flex-1 items-center justify-end gap-3">
+          <div className="flex flex-1 items-center justify-end gap-5 md:gap-6">
             <a
               href={instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="hover:text-clay transition-colors"
+              className="inline-flex h-9 w-9 items-center justify-center hover:bg-sand rounded transition-colors"
             >
               <InstagramIcon size={18} />
             </a>
