@@ -39,18 +39,19 @@ export async function Header() {
           <Link
             href="/"
             aria-label={`${SITE.name} home`}
-            className="flex shrink-0 items-center justify-center"
+            className="flex shrink-0 flex-col items-center justify-center gap-1"
           >
-            <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-24 md:w-24">
+            <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden md:h-28 md:w-28">
               <Image
-                src="/11.jpeg"
+                src="/logo-ds-designs.png"
                 alt={`${SITE.name} logo`}
-                width={96}
-                height={96}
+                width={112}
+                height={112}
                 priority
-                className="h-[88%] w-[88%] object-contain"
+                className="h-full w-full object-contain"
               />
             </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink md:text-sm">Designs</p>
           </Link>
 
           {/* Right: Account + Cart + Instagram */}
