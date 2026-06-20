@@ -41,12 +41,12 @@ export async function Header() {
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-20 md:w-20">
+            <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-linen bg-white shadow-sm md:h-24 md:w-24">
               <Image
                 src="/11.jpeg"
                 alt={`${SITE.name} logo`}
-                width={88}
-                height={88}
+                width={96}
+                height={96}
                 priority
                 className="h-[88%] w-[88%] object-contain"
               />
