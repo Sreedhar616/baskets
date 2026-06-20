@@ -30,16 +30,14 @@ export async function Header() {
       <div className="container-page py-4">
         {/* Top row: Logo centered, account + cart on right */}
         <div className="flex items-center justify-between gap-4 mb-4">
-          {/* Left: Mobile search (hidden on desktop) */}
-          <div className="flex-1 md:hidden">
-            <SearchBox />
-          </div>
+          {/* Left: Empty on mobile to balance layout */}
+          <div className="flex-1"></div>
 
           {/* Center: Logo */}
           <Link
             href="/"
             aria-label={`${SITE.name} home`}
-            className="flex shrink-0 flex-col items-center justify-center gap-1"
+            className="flex shrink-0 items-center justify-center"
           >
             <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden md:h-28 md:w-28">
               <Image
@@ -51,7 +49,6 @@ export async function Header() {
                 className="h-full w-full object-contain"
               />
             </div>
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink md:text-sm">Designs</p>
           </Link>
 
           {/* Right: Account + Cart + Instagram */}
@@ -74,6 +71,11 @@ export async function Header() {
             </Link>
             <CartButton />
           </div>
+        </div>
+
+        {/* Search below icons - mobile only */}
+        <div className="mb-4 md:hidden">
+          <SearchBox />
         </div>
 
         {/* Navigation row - horizontal on every device, never hidden in a menu */}
