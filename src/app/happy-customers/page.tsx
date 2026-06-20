@@ -39,15 +39,18 @@ export default async function HappyCustomersPage() {
       </header>
 
       <div className="mt-12 mb-12 flex justify-center">
-        <div className="relative w-full max-w-md aspect-[3/4] overflow-hidden rounded-[2rem] border border-linen shadow-lg bg-sand">
-          <Image
-            src="/images/happy-customer-v2.jpg"
-            alt="Happy customer with handmade basket"
-            fill
-            priority
-            sizes="(min-width: 768px) 400px, 90vw"
-            className="object-cover"
-          />
+        <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-linen shadow-lg bg-sand p-4">
+          <div className="relative w-full h-auto">
+            <Image
+              src="/images/happy-customer-v2.jpg"
+              alt="Happy customer with handmade basket"
+              width={400}
+              height={600}
+              priority
+              sizes="(min-width: 768px) 400px, 90vw"
+              className="w-full h-auto object-contain"
+            />
+          </div>
         </div>
       </div>
 
