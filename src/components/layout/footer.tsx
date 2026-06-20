@@ -17,14 +17,14 @@ export async function Footer() {
     <footer className="bg-sand border-t-2 border-linen">
       {/* Heritage banner */}
       <div className="bg-clay text-cream">
-        <div className="container-page py-4 text-center">
-          <p className="font-serif text-lg md:text-xl">Made in India · Handcrafted Products</p>
+        <div className="container-page py-2 text-center">
+          <p className="font-serif text-sm md:text-base">Made in India · Handcrafted Products</p>
         </div>
       </div>
 
       {/* Main footer content */}
-      <div className="container-page py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-4 mb-8">
+      <div className="container-page py-6 md:py-8">
+        <div className="grid gap-4 md:grid-cols-4 mb-4">
           {/* Brand section */}
           <div>
             <h3 className="font-serif text-xl text-ink mb-3">{SITE.name}</h3>
