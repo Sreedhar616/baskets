@@ -41,7 +41,7 @@ export default async function HappyCustomersPage() {
       <div className="mt-12 mb-12 flex justify-center">
         <div className="relative w-full max-w-md aspect-[3/4] overflow-hidden rounded-[2rem] border border-linen shadow-lg bg-sand">
           <Image
-            src="/images/happy-customer.jpg"
+            src="/images/happy-customer-v2.jpg"
             alt="Happy customer with handmade basket"
             fill
             priority
