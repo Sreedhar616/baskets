@@ -88,7 +88,7 @@ export default async function HomePage() {
           {/* Image */}
           <div className="relative aspect-square w-full md:aspect-auto md:min-h-[500px] md:order-2">
             <Image
-              src="/images/happy-customers-v2.png"
+              src="/images/happy-customers.png"
               alt="Happy customer with a D's Designs handwoven basket"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
