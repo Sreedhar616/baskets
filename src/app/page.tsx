@@ -83,24 +83,24 @@ export default async function HomePage() {
       <ReviewsSection />
 
       {/* ------------------------- Instagram CTA ------------------------ */}
-      <section className="container-page py-10 md:py-16">
-        <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
-          {/* Image */}
-          <div className="relative aspect-square w-full md:aspect-auto md:min-h-[500px] md:order-2 bg-sand flex items-center justify-center p-3 md:p-0">
-            <div className="relative w-full h-full">
+      <section className="py-10 md:py-16">
+        <div className="container-page">
+          {/* Image - Full width on mobile */}
+          <div className="relative w-full rounded-2xl overflow-hidden bg-sand mb-6 md:mb-0">
+            <div className="relative w-full aspect-[3/4]">
               <Image
                 src="/images/happy-customers.png"
                 alt="Happy customer with a D's Designs handwoven basket"
                 fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-contain"
+                sizes="(min-width: 768px) 100vw, 100vw"
+                className="object-cover"
                 priority={false}
               />
             </div>
           </div>
           
           {/* Content */}
-          <div className="flex flex-col justify-center gap-4 p-5 sm:p-6 md:order-1 md:gap-6 md:p-8 lg:p-12">
+          <div className="flex flex-col justify-center gap-4 rounded-2xl border border-border bg-sand p-5 sm:p-6 md:gap-6 md:p-8 lg:p-12">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
               @designsofds on Instagram
             </p>
