@@ -27,9 +27,9 @@ export async function Header() {
       )}
 
       {/* Main header with logo and navigation */}
-      <div className="container-page py-2">
+      <div className="container-page py-1">
         {/* Top row: Logo centered, account + cart on right */}
-        <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center justify-between gap-2">
           {/* Left: Empty on mobile to balance layout */}
           <div className="flex-1"></div>
 
@@ -39,7 +39,7 @@ export async function Header() {
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden md:h-28 md:w-28">
+            <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden md:h-24 md:w-24">
               <Image
                 src="/logo-ds-designs.png"
                 alt={`${SITE.name} logo`}
@@ -74,12 +74,12 @@ export async function Header() {
         </div>
 
         {/* Search below icons - mobile only */}
-        <div className="mb-2 md:hidden">
+        <div className="mb-1 md:hidden">
           <SearchBox />
         </div>
 
         {/* Navigation row - horizontal on every device, never hidden in a menu */}
-        <nav className="border-t border-linen pt-2 md:border-0 md:pt-0">
+        <nav className="border-t border-linen pt-1 md:border-0 md:pt-0">
           <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-1">
             {[
               { label: "Home", href: "/" },
@@ -100,7 +100,7 @@ export async function Header() {
         </nav>
 
         {/* Desktop search - shown on larger screens */}
-        <div className="hidden md:block mt-2 max-w-xs mx-auto">
+        <div className="hidden md:block mt-1 max-w-xs mx-auto">
           <SearchBox />
         </div>
       </div>
