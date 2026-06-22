@@ -86,14 +86,14 @@ export default async function HomePage() {
       <section className="py-8 md:py-12">
         <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
           {/* Image */}
-          <div className="relative aspect-square w-full md:aspect-auto md:min-h-[450px] md:order-2 bg-sand">
+          <div className="relative w-full min-h-80 md:min-h-[500px] md:order-2 bg-sand">
             <div className="relative w-full h-full">
               <Image
                 src="/images/happy-customers.png"
                 alt="Happy customer with a D's Designs handwoven basket"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
+                className="object-contain"
                 priority={false}
               />
             </div>
