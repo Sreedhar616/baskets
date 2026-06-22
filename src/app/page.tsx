@@ -117,13 +117,13 @@ export default async function HomePage() {
 
             {/* Image - Right side */}
             <div className="relative mx-auto w-full max-w-md">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
+              <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
                 <Image
                   src="/images/happy-customers.png"
                   alt="Happy customer with a D's Designs handwoven basket"
                   fill
-                  sizes="(min-width: 768px) 420px, 90vw"
-                  className="object-cover object-top"
+                  sizes="(min-width: 768px) 400px, 90vw"
+                  className="object-cover object-center"
                   priority={false}
                 />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
