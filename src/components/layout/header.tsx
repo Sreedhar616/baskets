@@ -27,7 +27,7 @@ export async function Header() {
       )}
 
       {/* Main header with logo and navigation */}
-      <div className="container-page py-1">
+      <div className="container-page py-0.5">
         {/* Top row: Logo centered, account + cart on right */}
         <div className="flex items-center justify-between gap-2">
           {/* Left: Empty on mobile to balance layout */}
@@ -39,7 +39,7 @@ export async function Header() {
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden md:h-24 md:w-24">
+            <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden md:h-20 md:w-20">
               <Image
                 src="/logo-ds-designs.png"
                 alt={`${SITE.name} logo`}

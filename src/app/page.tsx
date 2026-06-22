@@ -83,45 +83,51 @@ export default async function HomePage() {
       <ReviewsSection />
 
       {/* ------------------------- Instagram CTA ------------------------ */}
-      <section className="py-8 md:py-12">
-        <div className="grid overflow-hidden rounded-2xl border border-border bg-sand md:grid-cols-2 md:gap-0">
-          {/* Image */}
-          <div className="relative w-full min-h-80 md:min-h-[500px] md:order-2 bg-sand">
-            <div className="relative w-full h-full">
-              <Image
-                src="/images/happy-customers.png"
-                alt="Happy customer with a D's Designs handwoven basket"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-contain"
-                priority={false}
-              />
+      <section className="bg-cream border-b-2 border-linen">
+        <div className="container-page py-10 md:py-16">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+            {/* Content */}
+            <div className="flex flex-col justify-center gap-4 md:gap-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
+                @designsofds on Instagram
+              </p>
+              <h2 className="text-3xl font-bold uppercase tracking-tight text-ink md:text-4xl">
+                Our happy customers
+              </h2>
+              <p className="text-sm md:text-base text-ink-soft leading-relaxed">
+                See real customers with their handmade baskets and bags — or browse our full range on our WhatsApp catalogue.
+              </p>
+              <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/happy-customers"
+                  className={buttonClasses("primary", "lg")}
+                >
+                  View Happy Customers <ArrowRight size={18} />
+                </Link>
+                <a
+                  href={SITE.whatsappCatalogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonClasses("outline", "lg")}
+                >
+                  <WhatsAppIcon size={18} /> WhatsApp Catalogue
+                </a>
+              </div>
             </div>
-          </div>
-          
-          {/* Content */}
-          <div className="flex flex-col justify-center gap-4 p-6 sm:p-8 md:order-1 md:gap-5 md:p-8 lg:p-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay">
-              @designsofds on Instagram
-            </p>
-            <h2 className="text-2xl font-medium tracking-tight text-balance sm:text-3xl md:text-3xl lg:text-4xl">
-              Our happy customers
-            </h2>
-            <p className="text-sm leading-relaxed text-ink-soft md:text-base">
-              See real customers with their handmade baskets and bags — or browse our full range on our WhatsApp catalogue.
-            </p>
-            <div className="mt-2 flex flex-col gap-3 md:mt-4 md:flex-col lg:flex-row lg:gap-3">
-              <Link href="/happy-customers" className={buttonClasses("primary", "md")}>
-                View Happy Customers <ArrowRight size={18} />
-              </Link>
-              <a
-                href={SITE.whatsappCatalogUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonClasses("outline", "md")}
-              >
-                <WhatsAppIcon size={18} /> WhatsApp Catalogue
-              </a>
+
+            {/* Image - Right side */}
+            <div className="relative mx-auto w-full max-w-md">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
+                <Image
+                  src="/images/happy-customers.png"
+                  alt="Happy customer with a D's Designs handwoven basket"
+                  fill
+                  sizes="(min-width: 768px) 420px, 90vw"
+                  className="object-cover"
+                  priority={false}
+                />
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
+              </div>
             </div>
           </div>
         </div>
