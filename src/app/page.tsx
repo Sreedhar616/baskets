@@ -123,7 +123,7 @@ export default async function HomePage() {
                   alt="Happy customer with a D's Designs handwoven basket"
                   fill
                   sizes="(min-width: 768px) 400px, 90vw"
-                  className="object-cover object-center"
+                  className="object-cover object-top"
                   priority={false}
                 />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
