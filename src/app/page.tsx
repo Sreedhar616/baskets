@@ -117,7 +117,7 @@ export default async function HomePage() {
 
             {/* Image - Right side */}
             <div className="relative mx-auto w-full max-w-md">
-              <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
                 <Image
                   src="/images/happy-customers.png"
                   alt="Happy customer with a D's Designs handwoven basket"
