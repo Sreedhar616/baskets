@@ -108,7 +108,7 @@ export async function Header() {
         </nav>
 
         {/* Search below navigation */}
-        <div className="mb-1 md:hidden">
+        <div className="mt-2 mb-1">
           <SearchBox />
         </div>
       </div>
