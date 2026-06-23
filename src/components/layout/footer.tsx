@@ -14,7 +14,7 @@ export async function Footer() {
   const instagram = settings.instagramUrl || SITE.instagramUrl;
 
   return (
-    <footer className="bg-sand border-t-2 border-linen">
+    <footer id="footer" className="bg-sand border-t-2 border-linen">
       {/* Heritage banner */}
       <div className="bg-clay text-cream">
         <div className="container-page py-2 text-center">
@@ -67,7 +67,7 @@ export async function Footer() {
             <ul className="space-y-1 text-xs text-ink-soft">
               <li><Link href="/" className="hover:text-clay transition-colors">Home</Link></li>
               <li><Link href="/products" className="hover:text-clay transition-colors">Shop</Link></li>
-              <li><Link href="/happy-customers" className="hover:text-clay transition-colors">About Us</Link></li>
+              <li><a href="#footer" className="hover:text-clay transition-colors">About Us</a></li>
               <li><a href="#contact" className="hover:text-clay transition-colors">Contact</a></li>
             </ul>
           </div>
