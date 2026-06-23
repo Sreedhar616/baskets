@@ -5,7 +5,7 @@ import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { SearchBox } from "./search-box";
-import { InstagramIcon } from "@/components/ui/icons";
+import { InstagramIcon, ReelsIcon } from "@/components/ui/icons";
 
 export async function Header() {
   const [categories, settings] = await Promise.all([
@@ -51,7 +51,7 @@ export async function Header() {
             </div>
           </Link>
 
-          {/* Right: Account + Cart + Instagram */}
+          {/* Right: Account + Cart + Instagram + Reels */}
           <div className="flex flex-1 items-center justify-end gap-2">
             <a
               href={instagram}
@@ -63,6 +63,13 @@ export async function Header() {
               <InstagramIcon size={16} />
             </a>
             <Link
+              href="/happy-customers"
+              aria-label="Reels"
+              className="hover:text-clay transition-colors"
+            >
+              <ReelsIcon size={16} />
+            </Link>
+            <Link
               href="/account"
               aria-label="Account"
               className="inline-flex h-8 w-8 items-center justify-center hover:bg-sand rounded transition-colors"
@@ -73,8 +80,13 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Search below icons - mobile only */}
-        <div className="mb-1 md:hidden">
+        {/* Icons row */}
+        <div className="flex items-center justify-center gap-4 pt-2 pb-2 border-t border-linen md:border-t-0">
+          {/* Icons will be displayed here for better visibility */}
+        </div>
+
+        {/* Search bar below icons */}
+        <div className="pb-2">
           <SearchBox />
         </div>
 
@@ -98,11 +110,6 @@ export async function Header() {
             ))}
           </ul>
         </nav>
-
-        {/* Desktop search - shown on larger screens */}
-        <div className="hidden md:block mt-1 max-w-xs mx-auto">
-          <SearchBox />
-        </div>
       </div>
     </header>
   );
