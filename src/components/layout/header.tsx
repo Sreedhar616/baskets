@@ -14,6 +14,7 @@ export async function Header() {
   ]);
 
   const instagram = settings.instagramUrl ?? SITE.instagramUrl;
+  const whatsappCatalog = SITE.whatsappCatalogUrl;
 
   return (
     <header className="sticky top-0 z-40 bg-cream border-b-2 border-linen">
@@ -80,16 +81,27 @@ export async function Header() {
               { label: "Home", href: "/" },
               { label: "Shop", href: "/products" },
               { label: "Reels", href: "/happy-customers" },
-              { label: "About Us", href: "#about" },
-              { label: "Contact", href: "#contact" },
+              { label: "About Us", href: "#footer" },
+              { label: "Contact", href: whatsappCatalog, external: true },
             ].map((item) => (
               <li key={item.label} className="shrink-0">
-                <Link
-                  href={item.href}
-                  className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-clay hover:text-cream md:text-xs md:px-4 md:py-2"
-                >
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-clay hover:text-cream md:text-xs md:px-4 md:py-2"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-clay hover:text-cream md:text-xs md:px-4 md:py-2"
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
