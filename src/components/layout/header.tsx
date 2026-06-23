@@ -5,7 +5,7 @@ import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { SearchBox } from "./search-box";
-import { InstagramIcon, ReelsIcon } from "@/components/ui/icons";
+import { InstagramIcon } from "@/components/ui/icons";
 
 export async function Header() {
   const [categories, settings] = await Promise.all([
@@ -51,7 +51,7 @@ export async function Header() {
             </div>
           </Link>
 
-          {/* Right: Account + Cart + Instagram + Reels */}
+          {/* Right: Account + Cart + Instagram */}
           <div className="flex flex-1 items-center justify-end gap-2">
             <a
               href={instagram}
@@ -63,13 +63,6 @@ export async function Header() {
               <InstagramIcon size={16} />
             </a>
             <Link
-              href="/happy-customers"
-              aria-label="Reels"
-              className="hover:text-clay transition-colors"
-            >
-              <ReelsIcon size={16} />
-            </Link>
-            <Link
               href="/account"
               aria-label="Account"
               className="inline-flex h-8 w-8 items-center justify-center hover:bg-sand rounded transition-colors"
@@ -80,13 +73,8 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Icons row */}
-        <div className="flex items-center justify-center gap-4 pt-2 pb-2 border-t border-linen md:border-t-0">
-          {/* Icons will be displayed here for better visibility */}
-        </div>
-
-        {/* Search bar below icons */}
-        <div className="pb-2">
+        {/* Search below icons - mobile only */}
+        <div className="mb-1 md:hidden">
           <SearchBox />
         </div>
 
@@ -96,6 +84,7 @@ export async function Header() {
             {[
               { label: "Home", href: "/" },
               { label: "Shop", href: "/products" },
+              { label: "Reels", href: "/happy-customers" },
               { label: "About Us", href: "#about" },
               { label: "Contact", href: "#contact" },
             ].map((item) => (
