@@ -73,11 +73,6 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Search below icons - mobile only */}
-        <div className="mb-1 md:hidden">
-          <SearchBox />
-        </div>
-
         {/* Navigation row - horizontal on every device, never hidden in a menu */}
         <nav className="border-t border-linen pt-1 md:border-0 md:pt-0">
           <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-1">
@@ -99,6 +94,11 @@ export async function Header() {
             ))}
           </ul>
         </nav>
+
+        {/* Search below navigation */}
+        <div className="mb-1 md:hidden">
+          <SearchBox />
+        </div>
       </div>
     </header>
   );
