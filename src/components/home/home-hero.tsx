@@ -63,16 +63,16 @@ export function HomeHero() {
               className="animate-fade-rise relative mx-auto w-full max-w-md"
               style={{ animationDelay: "0.12s" }}
             >
-              <div className="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-tl-[3.5rem] rounded-br-[3.5rem] rounded-tr-2xl rounded-bl-2xl shadow-xl bg-sand">
                 <Image
                   src="/images/hero-weavers.jpg"
                   alt="Women artisans weaving colorful handmade baskets together"
                   fill
                   priority
                   sizes="(min-width: 768px) 420px, 90vw"
-                  className="object-contain"
+                  className="object-cover"
                 />
-                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 rounded-tl-[3.5rem] rounded-br-[3.5rem] rounded-tr-2xl rounded-bl-2xl" />
               </div>
 
               {/* Floating heritage badge */}
