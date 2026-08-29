@@ -15,13 +15,6 @@ export async function Footer() {
 
   return (
     <footer id="footer" className="bg-sand border-t-2 border-linen">
-      {/* Heritage banner */}
-      <div className="bg-clay text-cream">
-        <div className="container-page py-2 text-center">
-          <p className="font-serif text-sm md:text-base">Made in India · Handcrafted Products</p>
-        </div>
-      </div>
-
       {/* Main footer content */}
       <div className="container-page py-6 md:py-8">
         <div className="grid gap-4 md:grid-cols-4 mb-4">

@@ -17,12 +17,9 @@ export function HomeHero() {
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
           {/* Left: copy */}
           <div className="order-2 text-center md:order-1 md:text-left">
-            <p className="animate-fade-rise text-xs font-semibold uppercase tracking-[0.3em] text-clay mb-3">
-              Handcrafted Excellence
-            </p>
             <h1
               className="animate-fade-rise font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-4 text-balance"
-              style={{ animationDelay: "0.08s" }}
+              style={{ animationDelay: "0s" }}
             >
               Handwoven with Heart
             </h1>
@@ -51,13 +48,6 @@ export function HomeHero() {
                 <WhatsAppIcon size={18} /> View Catalogue
               </a>
             </div>
-
-            <p
-              className="animate-fade-rise text-xs md:text-sm text-ink-soft font-medium"
-              style={{ animationDelay: "0.32s" }}
-            >
-              Made in India · Handcrafted Products
-            </p>
           </div>
 
           {/* Right: tall editorial image with ambient zoom */}

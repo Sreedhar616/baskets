@@ -5,6 +5,7 @@ import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { SearchBox } from "./search-box";
+import { MobileNav } from "./mobile-nav";
 import { InstagramIcon } from "@/components/ui/icons";
 
 export async function Header() {
@@ -15,6 +16,13 @@ export async function Header() {
 
   const instagram = settings.instagramUrl ?? SITE.instagramUrl;
   const whatsappCatalog = SITE.whatsappCatalogUrl;
+
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Shop", href: "/products" },
+    { label: "About Us", href: "#footer" },
+    { label: "Contact", href: whatsappCatalog, external: true },
+  ];
 
   return (
     <header className="sticky top-0 z-40 bg-cream border-b-2 border-linen">
@@ -31,8 +39,10 @@ export async function Header() {
       <div className="container-page py-0.5">
         {/* Top row: Logo centered, account + cart on right */}
         <div className="flex items-center justify-between gap-2">
-          {/* Left: Empty on mobile to balance layout */}
-          <div className="flex-1"></div>
+          {/* Left: Mobile menu button, empty on desktop to balance layout */}
+          <div className="flex flex-1 items-center">
+            <MobileNav items={navItems} />
+          </div>
 
           {/* Center: Logo */}
           <Link
@@ -40,12 +50,12 @@ export async function Header() {
             aria-label={`${SITE.name} home`}
             className="flex shrink-0 items-center justify-center"
           >
-            <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden md:h-20 md:w-20">
+            <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden md:h-28 md:w-28">
               <Image
                 src="/logo-ds-designs.png"
                 alt={`${SITE.name} logo`}
-                width={112}
-                height={112}
+                width={160}
+                height={160}
                 priority
                 className="h-full w-full object-contain"
               />
@@ -74,16 +84,10 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Navigation row - horizontal on every device, never hidden in a menu */}
-        <nav className="border-t border-linen pt-1 md:border-0 md:pt-0">
-          <ul className="flex flex-nowrap items-center justify-center gap-1 overflow-x-auto no-scrollbar sm:gap-1">
-            {[
-              { label: "Home", href: "/" },
-              { label: "Shop", href: "/products" },
-              { label: "Reels", href: "/happy-customers" },
-              { label: "About Us", href: "#footer" },
-              { label: "Contact", href: whatsappCatalog, external: true },
-            ].map((item) => (
+        {/* Navigation row - horizontal pills on desktop only; mobile uses the hamburger menu above */}
+        <nav className="hidden border-t border-linen pt-1 md:block md:border-0 md:pt-0">
+          <ul className="flex flex-nowrap items-center justify-center gap-1 sm:gap-1">
+            {navItems.map((item) => (
               <li key={item.label} className="shrink-0">
                 {item.external ? (
                   <a

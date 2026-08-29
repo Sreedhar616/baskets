@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Category } from "@/types/db";
+
+type NavItem = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
 
 /** Mobile slide-out navigation. */
-export function MobileNav({ categories }: { categories: Category[] }) {
+export function MobileNav({ items }: { items: NavItem[] }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -62,33 +67,35 @@ export function MobileNav({ categories }: { categories: Category[] }) {
               </div>
 
               <nav className="mt-6 flex flex-col gap-1" onClick={() => setOpen(false)}>
-                <Link href="/" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
-                  Home
-                </Link>
-                <Link href="/products" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
-                  All Products
-                </Link>
-                <Link href="/happy-customers" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
-                  Happy Customers
-                </Link>
-                <Link href="/#reviews" className="rounded-lg px-3 py-3 text-base hover:bg-sand">
-                  Reviews
-                </Link>
-
-                <p className="eyebrow mt-5 px-3">Categories</p>
-                {categories.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/category/${c.slug}`}
-                    className="rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-sand hover:text-ink"
-                  >
-                    {c.name}
-                  </Link>
-                ))}
-
-                <Link href="/account" className="mt-5 rounded-lg px-3 py-3 text-base hover:bg-sand">
-                  My Account
-                </Link>
+                {items.map((item) =>
+                  item.external ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg px-3 py-3 text-base hover:bg-sand"
+                    >
+                      {item.label}
+                    </a>
+                  ) : item.href.startsWith("#") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="rounded-lg px-3 py-3 text-base hover:bg-sand"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="rounded-lg px-3 py-3 text-base hover:bg-sand"
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </nav>
             </aside>
           </>,
