@@ -63,14 +63,14 @@ export function HomeHero() {
               className="animate-fade-rise relative mx-auto w-full max-w-md"
               style={{ animationDelay: "0.12s" }}
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
+              <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
                 <Image
                   src="/images/hero-weavers.jpg"
                   alt="Women artisans weaving colorful handmade baskets together"
                   fill
                   priority
                   sizes="(min-width: 768px) 420px, 90vw"
-                  className="animate-slow-zoom object-cover"
+                  className="animate-slow-zoom object-contain"
                 />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[2rem]" />
               </div>
