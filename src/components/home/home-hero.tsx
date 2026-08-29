@@ -70,7 +70,7 @@ export function HomeHero() {
                   fill
                   priority
                   sizes="(min-width: 768px) 420px, 90vw"
-                  className="object-cover"
+                  className="object-cover scale-[1.12] object-[38%_50%]"
                 />
                 <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] ring-1 ring-inset ring-black/10" />
               </div>
