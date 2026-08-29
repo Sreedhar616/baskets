@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Instagram } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getCategories, getProducts } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { buttonClasses } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { ProductCard } from "@/components/product/product-card";
 import { CategoryRail } from "@/components/home/category-rail";
 import { HomeHero } from "@/components/home/home-hero";
 import { ReviewsSection } from "@/components/home/reviews-section";
-import { WhatsAppIcon } from "@/components/ui/icons";
+import { WhatsAppIcon, InstagramIcon } from "@/components/ui/icons";
 
 export default async function HomePage() {
   const [categories, products] = await Promise.all([
@@ -87,7 +87,7 @@ export default async function HomePage() {
                   rel="noopener noreferrer"
                   className={buttonClasses("primary", "lg")}
                 >
-                  <Instagram size={18} /> Follow on Instagram
+                  <InstagramIcon size={18} /> Follow on Instagram
                 </a>
                 <a
                   href={SITE.whatsappCatalogUrl}
