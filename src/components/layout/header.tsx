@@ -5,7 +5,6 @@ import { getCategories, getSettings } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { CartButton } from "./cart-button";
 import { SearchBox } from "./search-box";
-import { MobileNav } from "./mobile-nav";
 import { InstagramIcon } from "@/components/ui/icons";
 
 export async function Header() {
@@ -39,10 +38,8 @@ export async function Header() {
       <div className="container-page py-0.5">
         {/* Top row: Logo centered, account + cart on right */}
         <div className="flex items-center justify-between gap-2">
-          {/* Left: Mobile menu button, empty on desktop to balance layout */}
-          <div className="flex flex-1 items-center">
-            <MobileNav items={navItems} />
-          </div>
+          {/* Left: empty spacer to balance the layout and keep logo centered */}
+          <div className="flex flex-1 items-center" />
 
           {/* Center: Logo */}
           <Link
@@ -84,9 +81,9 @@ export async function Header() {
           </div>
         </div>
 
-        {/* Navigation row - horizontal pills on desktop only; mobile uses the hamburger menu above */}
-        <nav className="hidden border-t border-linen pt-1 md:block md:border-0 md:pt-0">
-          <ul className="flex flex-nowrap items-center justify-center gap-1 sm:gap-1">
+        {/* Navigation row - horizontal pills, wraps on narrow screens */}
+        <nav className="border-t border-linen pt-1 md:border-0 md:pt-0">
+          <ul className="flex flex-wrap items-center justify-center gap-1 sm:gap-1">
             {navItems.map((item) => (
               <li key={item.label} className="shrink-0">
                 {item.external ? (
