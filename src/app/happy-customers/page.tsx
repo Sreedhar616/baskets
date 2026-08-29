@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getInstagramPosts, getSettings } from "@/lib/queries";
-import { InstagramReels } from "@/components/instagram/instagram-embed";
-import { ReelsIcon } from "@/components/ui/icons";
+import { getSettings } from "@/lib/queries";
+import { InstagramIcon } from "@/components/ui/icons";
 import { buttonClasses } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -13,10 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HappyCustomersPage() {
-  const [posts, settings] = await Promise.all([
-    getInstagramPosts(),
-    getSettings(),
-  ]);
+  const settings = await getSettings();
   const instagram = settings.instagramUrl ?? "https://www.instagram.com/";
 
   return (
@@ -34,14 +30,9 @@ export default async function HappyCustomersPage() {
           rel="noopener noreferrer"
           className={buttonClasses("outline", "md", "mt-6")}
         >
-          <ReelsIcon size={18} /> Follow us on Instagram
+          <InstagramIcon size={18} /> Follow us on Instagram
         </a>
       </header>
-
-      <div className="mt-10">
-        <InstagramReels posts={posts} />
-        <p className="mt-3 text-center text-xs text-ink-soft">Swipe up for more ↑</p>
-      </div>
 
       <div className="mt-12 mb-12 flex justify-center">
         <div className="relative w-full max-w-md aspect-[2/3] overflow-hidden rounded-[2rem] border border-linen shadow-lg bg-sand">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Truck, ShieldCheck, HandHeart, BadgeIndianRupee, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getCategories, getProducts } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { buttonClasses } from "@/components/ui/button";
@@ -22,23 +22,6 @@ export default async function HomePage() {
     <>
       {/* ---------------------- Illustration hero ----------------------- */}
       <HomeHero />
-
-      {/* --------------------------- Trust band ------------------------- */}
-      <section className="border-b border-border bg-ink text-cream">
-        <div className="container-page grid grid-cols-2 gap-4 py-5 text-sm md:grid-cols-4">
-          {[
-            { icon: HandHeart, label: "Handmade with care" },
-            { icon: Truck, label: "Free shipping over ₹999" },
-            { icon: BadgeIndianRupee, label: "Cash on Delivery" },
-            { icon: ShieldCheck, label: "Secure UPI & card payments" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-2.5">
-              <Icon size={20} className="shrink-0" />
-              <span className="text-cream/85">{label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* -------------------- Categories (side-scroll) ------------------ */}
       <section id="categories" className="container-page scroll-mt-24 py-10 md:py-14">
