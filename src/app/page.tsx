@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Instagram } from "lucide-react";
 import { getCategories, getProducts } from "@/lib/queries";
 import { SITE } from "@/lib/constants";
 import { buttonClasses } from "@/components/ui/button";
@@ -75,18 +75,20 @@ export default async function HomePage() {
                 @designsofds on Instagram
               </p>
               <h2 className="text-3xl font-bold uppercase tracking-tight text-ink md:text-4xl">
-                Our happy customers
+                Follow us for more
               </h2>
               <p className="text-sm md:text-base text-ink-soft leading-relaxed">
                 See real customers with their handmade baskets and bags — or browse our full range on our WhatsApp catalogue.
               </p>
               <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/happy-customers"
+                <a
+                  href={SITE.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={buttonClasses("primary", "lg")}
                 >
-                  View Happy Customers <ArrowRight size={18} />
-                </Link>
+                  <Instagram size={18} /> Follow on Instagram
+                </a>
                 <a
                   href={SITE.whatsappCatalogUrl}
                   target="_blank"
