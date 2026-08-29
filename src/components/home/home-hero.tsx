@@ -48,6 +48,13 @@ export function HomeHero() {
                 <WhatsAppIcon size={18} /> View Catalogue
               </a>
             </div>
+
+            <p
+              className="animate-fade-rise text-[0.7rem] uppercase tracking-[0.2em] text-ink-soft/70"
+              style={{ animationDelay: "0.3s" }}
+            >
+              Made in India
+            </p>
           </div>
 
           {/* Right: tall editorial image with ambient zoom */}
