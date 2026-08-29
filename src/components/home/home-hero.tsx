@@ -65,8 +65,8 @@ export function HomeHero() {
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-linen shadow-xl bg-sand">
                 <Image
-                  src="/images/hero-baskets.png"
-                  alt="Women artisans weaving handmade baskets by hand"
+                  src="/images/hero-weavers.jpg"
+                  alt="Women artisans weaving colorful handmade baskets together"
                   fill
                   priority
                   sizes="(min-width: 768px) 420px, 90vw"
